@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { SidebarContext } from "../contexts/SidebarProvider";
 
 const NavBar = () => {
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
   return (
-    <nav className="shadow-lg">
+    <nav className="shadow-lg fixed z-10 w-full">
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -70,7 +73,8 @@ const NavBar = () => {
               className="input input-bordered w-24 md:w-auto"
             />
           </div>
-          <div className="dropdown dropdown-end">
+          {/**BUTTON CART */}
+          <div className={`${isOpen && 'hidden'}  dropdown dropdown-end`}>
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator">
                 <svg
@@ -98,8 +102,11 @@ const NavBar = () => {
                 <span className="font-bold text-lg">8 Items</span>
                 <span className="text-info">Subtotal: $999</span>
                 <div className="card-actions">
-                  <button className="btn btn-primary btn-block">
-                    View cart
+                  <button
+                    className="btn btn-primary btn-block"
+                    onClick={() => setIsOpen(!isOpen)}
+                  >
+                    Ver carrito
                   </button>
                 </div>
               </div>

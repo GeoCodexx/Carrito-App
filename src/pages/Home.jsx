@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ProductCard from "../components/ProductCard";
-import { ProductContext } from "../context/ProductProvider";
+import { ProductContext } from "../contexts/ProductProvider";
 
 const Home = () => {
   const { products } = useContext(ProductContext);
