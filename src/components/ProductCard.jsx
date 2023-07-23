@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../contexts/CartProvider";
+import { CartContext, types } from "../contexts/CartProvider";
 
 const ProductCard = ({ product }) => {
-  const { addToCart } = useContext(CartContext);
+  const { /*addToCart*/dispatch } = useContext(CartContext);
 
   return (
     <>
@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
 
             <button
               className="btn btn-primary"
-              onClick={() => addToCart(product)}
+              onClick={() => dispatch({type: types.add, payload: product}) /*addToCart(product)*/}
             >
               Agregar
             </button>

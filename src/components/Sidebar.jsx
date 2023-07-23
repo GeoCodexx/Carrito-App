@@ -6,7 +6,7 @@ import CartItem from "./CartItem";
 
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
-  const { cart } = useContext(CartContext);
+  const { state /*cart*/ } = useContext(CartContext);
   //console.log(useContext(CartContext));
 
   return (
@@ -25,7 +25,7 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="my-5">
-        {cart.map((item, i) => (
+        {state.map((item, i) => (
           <CartItem item={item} key={i} />
         ))}
       </div>
