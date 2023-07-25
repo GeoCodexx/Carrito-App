@@ -56,49 +56,30 @@ export const CartContext = createContext();
 const CartProvider = ({ children }) => {
   //const [cart, setCart] = useState([]);
   const [state, dispatch] = useReducer(reducer, []);
-  const [total, settotal] = useState(0);
+  const [igv, setIgv] = useState(0);
   const [subtotal, setSubtotal] = useState(0);
+  const [total, settotal] = useState(0);
 
   useEffect(() => {
     if (state.length > 0) {
+      //Calculate the subtotal of shopping cart items
+      const subtotalCart = state.reduce((accumulator, item) => {
+        return accumulator + item.amount * item.price;
+      }, 0);
 
-      const subtotal = state.reduce((prev, cur) => prev + cur.amount * cur.price);
-      console.log(JSON.stringify(subtotal));
-      /*setSubtotal(
-        [state].reduce(
-          (prev, cur) => prev.amount * prev.price + cur.amount * cur.price
-        )
-      );*/
-      //const subtotal = 
-      //settotal(subtotal + 0.16 * subtotal);
+      //Calculate subtotal, total & IGV
+      setSubtotal(subtotalCart.toFixed(2));
+      setIgv((subtotalCart * 0.18).toFixed(2));
+      settotal((subtotalCart + subtotalCart * 0.18).toFixed(2));
     } else {
       setSubtotal(0);
+      setIgv(0);
       settotal(0);
     }
   }, [state]);
 
-  /*const addToCart = (product) => {
-    //console.log('Agregado al carrito');
-    const newItem = { ...product, amount: 1 };
-
-    //Verificar si el producto esta en el carrito
-    const cartItem = cart.find((item) => item.id === product.id);
-    //console.log(cartItem);
-
-    if (cartItem) {
-      const newCart = [...cart].map((item) =>
-        item.id === product.id ? { ...item, amount: cartItem.amount + 1 } : item
-      );
-      setCart(newCart);
-    } else {
-      setCart([...cart, newItem]);
-    }
-  };*/
-  //console.log(cart);
   return (
-    <CartContext.Provider
-      value={{ /*addToCart, cart*/ state, dispatch, total, subtotal }}
-    >
+    <CartContext.Provider value={{ state, dispatch, igv, total, subtotal }}>
       {children}
     </CartContext.Provider>
   );

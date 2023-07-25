@@ -11,14 +11,14 @@ const CartItem = ({ item }) => {
 
   return (
     <div className="flex justify-between items-center rounded-md shadow">
-      <div className="min-h-[150px] flex items-center px-1">
+      <div className="min-h-[120px] flex items-center px-1">
         {/**Image */}
         <Link to={`/product/${id}`}>
           <img className="max-w-[60px]" src={image} alt={title} />
         </Link>
       </div>
       {/**title and remove icon*/}
-      <div className="flex flex-col justify-center p-2">
+      <div className="flex flex-col justify-center p-2 ml-4">
         <div className="flex justify-between">
           <div className="title-cart-item">
             <Link className="text-xs uppercase font-medium">{title}</Link>

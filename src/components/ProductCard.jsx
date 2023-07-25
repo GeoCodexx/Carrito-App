@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext, types } from "../contexts/CartProvider";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, badge=false }) => {
   const { /*addToCart*/dispatch } = useContext(CartContext);
 
   return (
@@ -23,7 +23,7 @@ const ProductCard = ({ product }) => {
           <Link to={`/product/${product.id}`}>
           <h2 className="card-title">
             {product.title}
-            {/* <div className="badge badge-secondary">NEW</div> */}
+            {badge && <div className="badge badge-secondary">Nuevo</div> }
           </h2>
           <p className="truncate">{product.description}</p></Link>
           <div className="card-actions justify-between">
@@ -31,7 +31,6 @@ const ProductCard = ({ product }) => {
               S/ {product.price}
             </p>
             {/**BUTTON BUY */}
-
             <button
               className="btn btn-primary"
               onClick={() => dispatch({type: types.add, payload: product}) /*addToCart(product)*/}
