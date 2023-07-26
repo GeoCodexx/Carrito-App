@@ -78,7 +78,7 @@ const NavBar = () => {
       priceFilter,
       ratingValue /*, location.pathname*/
     );
-    navegar('/filteredproducts');
+    navegar("/filteredproducts");
   };
 
   /**CLEAN FILTER OPTIONS */
@@ -105,13 +105,13 @@ const NavBar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Inicio</a>
+                <Link to="/">Inicio</Link>
               </li>
               <li>
-                <a>Ofertas</a>
+                <Link to="/news">Novedades</Link>
               </li>
               <li>
-                <a>Más Vendidos</a>
+                <Link to="/bestsellers">Más Vendidos</Link>
               </li>
             </ul>
           </div>
@@ -162,9 +162,9 @@ const NavBar = () => {
                 </a>
               </li>
               <li>
-                <a>
-                  <AiOutlineShoppingCart onClick={() => setIsOpen(!isOpen)} />{" "}
-                  Ver Carrito
+                <a onClick={() => setIsOpen(!isOpen)}>
+                  <AiOutlineShoppingCart />
+                  Ver Lista
                 </a>
               </li>
             </ul>
@@ -211,7 +211,7 @@ const NavBar = () => {
                     className="btn btn-primary btn-block"
                     onClick={() => setIsOpen(!isOpen)}
                   >
-                    Ver carrito
+                    Ver Lista
                   </button>
                 </div>
               </div>

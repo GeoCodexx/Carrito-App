@@ -3,6 +3,7 @@ import { SidebarContext } from "../contexts/SidebarProvider";
 import { IoMdArrowForward } from "react-icons/io";
 import { CartContext } from "../contexts/CartProvider";
 import CartItem from "./CartItem";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
@@ -13,7 +14,7 @@ const Sidebar = () => {
     <div
       className={`${
         isOpen ? "right-0" : "-right-full"
-      } w-full bg-white fixed top-[69px] h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px] rounded-s-md pb-16 select-none`}
+      } w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px] rounded-s-md select-none`}
     >
       <div className="flex items-center justify-between py-2 border-b">
         <div className="uppercase text-sm font-semibold">
@@ -26,26 +27,26 @@ const Sidebar = () => {
           </button>
         </div>
       </div>
-      <div className="mt-2 pb-3 border-b h-4/6 overflow-y-auto">
+      <div className="mt-2 pb-3 border-b border-black/50 h-2/3 overflow-y-auto">
         {state.map((item, i) => (
           <CartItem item={item} key={i} />
         ))}
       </div>
 
-      <div className="totales-main w-full mt-3">
+      <div className="totales-main w-full mt-1">
         <div className="totales text-end">
           <div className="border-b p-1">
-            subtotal: <span className="ml-4">{`S/${subtotal}`}</span>
+            subtotal: <span className="ml-3">{`S/${subtotal}`}</span>
           </div>
           <div className="pt-1">
-            IGV(18%): <span className="ml-4">{`S/${igv}`}</span>
+            IGV (18%): <span className="ml-4">{`S/${igv}`}</span>
           </div>
           <div className="font-bold pb-1">
-            Total: <span className="ml-4">{`S/${total}`}</span>
+            TOTAL: <span className="ml-3">{`S/${total}`}</span>
           </div>
         </div>
-        <div className="flex justify-center w-full mt-6 pb-2">
-          <button className="btn btn-wide btn-outline">PROCESAR COMPRA</button>
+        <div className="flex justify-center w-full mt-3 pb-2">
+          <Link className="btn btn-wide btn-outline">IR AL CARRITO</Link>
         </div>
       </div>
     </div>

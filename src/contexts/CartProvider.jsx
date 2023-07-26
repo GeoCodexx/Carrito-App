@@ -2,6 +2,7 @@ import { createContext, useEffect, useState, useReducer } from "react";
 
 export const types = {
   add: "add",
+  addDetail: "addDetail",
   remove: "remove",
   increment: "increment",
   decrement: "decrement",
@@ -34,6 +35,7 @@ export const reducer = (state, action) => {
       const newState = state.filter((items) => items.id !== action.payload);
       //console.log(newState);
       return newState;
+
     case types.increment:
       return state.map((item) =>
         item.id === action.payload ? { ...item, amount: item.amount + 1 } : item
@@ -46,6 +48,26 @@ export const reducer = (state, action) => {
             : item
         )
         .filter((item) => item.amount > 0);
+    case types.addDetail:
+      //console.log('Agregado al carrito');
+      const itm = { ...action.payload.product, amount: action.payload.qty };
+      //Verificar si el producto esta en el carrito
+      const cartItm = state.find(
+        (item) => item.id === action.payload.product.id
+      );
+      //console.log(cartItem);
+      if (cartItm) {
+        const newCart = [...state].map((item) =>
+          item.id === action.payload.product.id
+            ? { ...item, amount: cartItm.amount + action.payload.qty }
+            : item
+        );
+        //setCart(newCart);
+        return newCart;
+      } else {
+        return [...state, itm];
+      }
+
     default:
       return state;
   }
