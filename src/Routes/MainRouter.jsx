@@ -5,6 +5,7 @@ import NewProducts from "../pages/NewProducts";
 import BestSellers from "../pages/BestSellers";
 import ProductDetail from "../pages/ProductDetail";
 import FilteredProducts from "../pages/FilteredProducts";
+import Cart from "../pages/Cart";
 
 const MainRouter = () => {
   return (
@@ -14,6 +15,7 @@ const MainRouter = () => {
       <Route path="/bestsellers" element={<BestSellers />} />
       <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/filteredproducts" element={<FilteredProducts />} />
+      <Route path="/cart" element={<Cart />} />
       <Route path="/*" element={<Navigate to="/" />} />
     </Routes>
   );

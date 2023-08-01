@@ -14,15 +14,15 @@ const Sidebar = () => {
     <div
       className={`${
         isOpen ? "right-0" : "-right-full"
-      } w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px] rounded-s-md select-none`}
+      } w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] transition-all duration-500 z-20 px-4 lg:px-[35px] rounded-s-md select-none`}
     >
       <div className="flex items-center justify-between py-2 border-b">
         <div className="uppercase text-sm font-semibold">
-          Carrito de Compras ({state.length} items)
+          Carrito de Compras ({state.length} arts.)
         </div>
         {/**icono */}
         <div onClick={handleClose} className="flex justify-center items-center">
-          <button className="btn btn-ghost">
+          <button className="btn btn-ghost btn-circle">
             <IoMdArrowForward className="w-6 h-6"></IoMdArrowForward>
           </button>
         </div>
@@ -46,7 +46,7 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="flex justify-center w-full mt-3 pb-2">
-          <Link className="btn btn-wide btn-outline">IR AL CARRITO</Link>
+          <Link to="/cart" className="btn btn-wide btn-outline" onClick={handleClose}>IR AL CARRITO</Link>
         </div>
       </div>
     </div>

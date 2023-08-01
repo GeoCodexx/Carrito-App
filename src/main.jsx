@@ -6,9 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 import ProductProvider from "./contexts/ProductProvider.jsx";
 import SidebarProvider from "./contexts/SidebarProvider.jsx";
 import CartProvider from "./contexts/CartProvider.jsx";
+import FilterProvider from "./contexts/FilterProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <SidebarProvider>
+    <FilterProvider>
     <CartProvider>
       <ProductProvider>
         <React.StrictMode>
@@ -17,6 +19,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           </BrowserRouter>
         </React.StrictMode>
       </ProductProvider>
-    </CartProvider>
+    </CartProvider></FilterProvider>
   </SidebarProvider>
 );

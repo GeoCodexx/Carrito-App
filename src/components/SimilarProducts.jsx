@@ -24,22 +24,31 @@ const SimilarProducts = ({ category, idProd }) => {
         {similar.length > 0 ? (
           similar.map((item) => (
             <Link to={`/product/${item.id}`} key={item.id}>
-              <div className="border p-1 relative rounded-lg overflow-hidden group hover:shadow-lg">
-                <figure>
+              <div className="border p-1 relative rounded-lg overflow-hidden group hover:shadow-lg h-full">
+                <figure className="h-3/5">
                   <img
                     className="max-h-[200px] max-w-[200px] mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
                     src={item.image}
                     alt={item.title}
                   />
                 </figure>
-                <p className="text-center my-2 px-2">{item.title}</p>
+                {item.title.length <= 28 ? (
+                  <p className="text-center my-2 px-2 mb-8">{item.title}</p>
+                ) : (
+                  <p className="text-center my-2 px-2">
+                    {item.title.length > 60
+                      ? `${item.title.substring(0, 50)}...`
+                      : item.title}
+                  </p>
+                )}
+
                 <div className="absolute top-0 left-0 bg-secondary p-1 rounded-e-lg">
                   <p className="text-center text-white">
                     -{Math.round(Math.random() * 20 + 10)}%
                   </p>
                 </div>
                 <div className="flex justify-center">
-                  <p className="text-xl font-semibold px-12 py-2 text-gray-300 bg-neutral rounded-lg">
+                  <p className="text-xl px-12 py-2 text-gray-300 bg-primary rounded-lg">
                     S/{item.price.toFixed(2)}
                   </p>
                 </div>

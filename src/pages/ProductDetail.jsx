@@ -30,9 +30,9 @@ const ProductDetail = () => {
     <div className="main pb-10">
       <div className="container mx-auto px-4 pt-20 mb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 shadow-md rounded-md p-4 border">
-          <div className="image-section grid grid-cols-1 sm:grid-cols-5 border">
-            <div className="thumbs col-span-1 flex flex-row sm:flex-col justify-evenly">
-              <div className="p-4 w-1/4 sm:w-full hover:border hover:shadow-md rounded-md group transition ease">
+          <div className="image-section grid grid-cols-1 md:grid-cols-5 border">
+            <div className="thumbs col-span-1 flex flex-row md:flex-col justify-evenly">
+              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
                 <figure>
                   <img
                     className="group-hover:scale-150 transition duration-300 ease-in-out"
@@ -41,7 +41,7 @@ const ProductDetail = () => {
                   />
                 </figure>
               </div>
-              <div className="p-4 w-1/4 sm:w-full hover:border hover:shadow-md rounded-md group transition ease">
+              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
                 <figure>
                   <img
                     className="group-hover:scale-150 transition duration-300 ease-in-out"
@@ -50,7 +50,7 @@ const ProductDetail = () => {
                   />
                 </figure>
               </div>
-              <div className="p-4 w-1/4 sm:w-full hover:border hover:shadow-md rounded-md group transition ease">
+              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
                 <figure>
                   <img
                     className="group-hover:scale-150 transition duration-300 ease-in-out"
@@ -59,7 +59,7 @@ const ProductDetail = () => {
                   />
                 </figure>
               </div>
-              <div className="p-4 w-1/4 sm:w-full hover:border hover:shadow-md rounded-md group transition ease">
+              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
                 <figure>
                   <img
                     className="group-hover:scale-150 transition duration-300 ease-in-out"

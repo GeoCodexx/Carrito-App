@@ -21,13 +21,14 @@ const NavBar = () => {
 
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { state, subtotal } = useContext(CartContext);
-  const { setSearchWord, result, setFilterProducts } =
-    useContext(ProductContext);
+  const { setSearchWord, result, setFilterProducts } = useContext(ProductContext);
+
+  /**BUSQUEDA DE ARTÍCULOS */
 
   useEffect(() => {
     const getData = setTimeout(() => {
       setSearchWord(search);
-    }, 1500);
+    }, 1200);
 
     return () => clearTimeout(getData);
   }, [search]);
@@ -134,12 +135,35 @@ const NavBar = () => {
         </div>
         <div className="navbar-end">
           {/**BUTTON SEARCH MAIN*/}
-          <div className="form-control hidden md:flex">
-            <input
-              type="search"
-              placeholder="Buscar..."
-              className="input input-bordered w-24 md:w-auto"
-            />
+          <div className="form-control hidden md:flex relative w-full">
+            <div className="flex justify-center items-center px-2 ml-1 w-full">
+              <MdSearch className="-mr-10 z-10 text-gray-500" />
+              <input
+                type="search"
+                placeholder="Buscar..."
+                className="input input-bordered input-sm w-full xl:w-96 md:w-[233px] ml-5 pl-6"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
+            {/**RESULT BOX MAIN*/}
+            <div className="px-3 text-sm absolute top-6 right-0 w-full flex justify-center">
+              <ul
+                className={`w-[233px] xl:w-96 p-2 shadow-lg menu dropdown-content z-[1] bg-base-100 rounded-b-md border border-t-0 ml-1 ${
+                  search === "" && "hidden"
+                }`}
+              >
+                {result.map((r, i) => (
+                  <li key={i} className="md:max-w-[220px] overflow-hidden md:text-xs xl:max-w-none">
+                    <Link to={`/product/${r.id}`} onClick={()=>setSearch("")}>
+                      {r.title.length > 29
+                        ? `${r.title.substring(0, 56)}...`
+                        : r.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/**BUTTON OPTIONS MOVIL */}
@@ -174,7 +198,7 @@ const NavBar = () => {
           <div
             className={`${
               isOpen && "hidden"
-            } hidden md:flex dropdown dropdown-end sm:ml-2`}
+            } hidden md:inline-block dropdown dropdown-end sm:ml-2`}
           >
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator">
@@ -247,7 +271,7 @@ const NavBar = () => {
               >
                 {result.map((r, i) => (
                   <li key={i} className="">
-                    <Link to={`/detail/${r.id}`}>
+                    <Link to={`/product/${r.id}`}>
                       {r.title.length > 29
                         ? `${r.title.substring(0, 29)}...`
                         : r.title}
