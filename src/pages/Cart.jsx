@@ -30,7 +30,7 @@ const Cart = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-20">
-          <div className="list-items px-5 h-full">
+          <div className="list-items px-5 h-full mt-4">
             <h2 className="text-lg font-semibold uppercase border-b-2">
               Lista de Productos
             </h2>
@@ -66,7 +66,6 @@ const Cart = () => {
                 <input
                   name="name"
                   type="text"
-                  placeholder="Type here"
                   className="input input-bordered w-full max-w-xs"
                   required
                 />
@@ -78,7 +77,6 @@ const Cart = () => {
                 <input
                   name="lastname"
                   type="text"
-                  placeholder="Type here"
                   className="input input-bordered w-full max-w-xs"
                   required
                 />
@@ -90,7 +88,6 @@ const Cart = () => {
                 <input
                   name="email"
                   type="email"
-                  placeholder="Type here"
                   className="input input-bordered w-full max-w-xs"
                   required
                 />
@@ -102,7 +99,6 @@ const Cart = () => {
                 <input
                   name="address"
                   type="text"
-                  placeholder="Type here"
                   className="input input-bordered w-full max-w-xs"
                   required
                 />
@@ -114,7 +110,6 @@ const Cart = () => {
                 <input
                   name="phone"
                   type="text"
-                  placeholder="Type here"
                   className="input input-bordered w-full max-w-xs"
                   required
                 />

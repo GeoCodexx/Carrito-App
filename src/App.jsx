@@ -10,7 +10,8 @@ import Sidebar from "./components/Sidebar";
 function App() {
 
   const location = useLocation();
-  const shouldHideFilter = location.pathname.startsWith("/product/");
+  const shouldHideFilter = location.pathname.startsWith("/product/") || location.pathname.startsWith("/cart");
+
 
   return (
     <>

@@ -20,6 +20,7 @@ const ProductCard = ({ product, badge = false }) => {
           </figure>
         </Link>
         <div className="card-body">
+        {badge && <div className="badge badge-secondary">Nuevo</div>}
           <Link to={`/product/${product.id}`}>
             <h2
               className={`card-title text-base ${
@@ -29,11 +30,11 @@ const ProductCard = ({ product, badge = false }) => {
               {product.title.length >= 45
                 ? `${product.title.substring(0, 45)}...`
                 : product.title}
-              {badge && <div className="badge badge-secondary">Nuevo</div>}
+              
             </h2>
           </Link>
           <div className="card-actions justify-between">
-            <p className="font-semibold text-lg text-secondary">
+            <p className="font-medium text-lg text-secondary">
               S/ {product.price.toFixed(2)}
             </p>
             {/**BUTTON BUY */}

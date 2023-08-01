@@ -8,6 +8,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
 import { ProductContext } from "../contexts/ProductProvider";
 import { MdSearch } from "react-icons/md";
+import  logoImage  from "../assets/logo-cart-96x96.svg";
 
 const NavBar = () => {
   const inputSearchRef = useRef();
@@ -116,7 +117,8 @@ const NavBar = () => {
               </li>
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl">
+          <Link to="/" className="btn btn-ghost normal-case text-xl lg:text-2xl">
+            <img src={logoImage} className="w-8 lg:w-10" alt="logo" />
             Carrito App
           </Link>
         </div>
@@ -244,14 +246,15 @@ const NavBar = () => {
         </div>
       </div>
       {/**DIALOG SEARCH PRODUCT */}
-      <dialog id="modal_search" className="modal modal-top sm:modal-middle">
+      <dialog id="modal_search" className="modal modal-top top-[66px] sm:modal-middle">
         <form method="dialog" className="modal-box">
           {/**BTN CLOSE DIALOG */}
           <button className="btn btn-sm btn-circle btn-ghost absolute right-1 top-1">
             ✕
           </button>
           <div className="form-control mt-2 ">
-            <div className="flex justify-center items-center px-2 ml-1">
+            <label className="">Buscador de artículos:</label>
+            <div className="flex justify-center items-center px-2 ml-1 mt-2">
               <MdSearch className="-mr-10 z-10 text-gray-500" />
               <input
                 ref={inputSearchRef}
