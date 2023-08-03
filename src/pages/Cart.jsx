@@ -1,8 +1,8 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../contexts/CartProvider";
 import { FaAngleDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { IoMdArrowForward, IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import CartItem from "../components/CartItem";
 import Invoice from "../components/Invoice";
 
@@ -10,11 +10,43 @@ const Cart = () => {
   //const [l, setl] = useState(second)
   const { state, igv, subtotal, total } = useContext(CartContext);
 
+  const [sortBy, setSortBy] = useState("");
+
+  //Función para abrir el modal que contiene la factura de la compra
   const handleSubmit = (e) => {
     e.preventDefault();
     window.modal_invoice.showModal();
     console.log(e.target.value);
   };
+
+  // Función para ordenar los elementos por la propiedad "precio"
+  const sortByPrice = (a, b) => {
+    return a.price - b.price;
+  };
+
+  // Función para ordenar los elementos por la propiedad "nombre"
+  const sortByTitle = (a, b) => {
+    return a.title.localeCompare(b.title);
+  };
+
+  // Función para cambiar el tipo de ordenamiento
+  const handleSortByClick = (event) => {
+    const elem = document.activeElement; //Detecta el elemento enfocado actualmente en el documento.
+
+    setSortBy(event.target.textContent);
+    elem?.blur(); //Cierra el dropdown al hacer click, pierde el foco.
+  };
+
+  // Obtener el arreglo ordenado según el tipo de ordenamiento seleccionado
+  let sortedData;
+
+  if (sortBy === "Precio") {
+    sortedData = state.sort(sortByPrice);
+  } else if (sortBy === "Nombre") {
+    sortedData = state.sort(sortByTitle);
+  } else {
+    sortedData = state;
+  }
 
   return (
     <div className="main">
@@ -35,25 +67,54 @@ const Cart = () => {
               Lista de Productos
             </h2>
             <div className="flex justify-between items-center my-4">
-              <div className="w-1/2 mx-auto">
+              <div className="w-1/2 mx-auto text-sm md:text-base">
                 Tienes {state.length} artículos en tu carrito
               </div>
-              <div className="filter-items flex flex-col md:flex-row justify-center items-center w-1/2 mx-auto">
-                <p>Ordenar por:</p>{" "}
-                <p className="flex items-center">
+              <div className="filter-items flex justify-center items-center w-1/2 mx-auto">
+                <p className="mr-1 text-sm md:text-base">Ordenar por</p>
+                {/* <p className="flex items-center">
                   precio <FaAngleDown className="h-5 w-5 ml-1" />
-                </p>
+                </p> */}
+                <div className="dropdown dropdown-end">
+                  <label
+                    tabIndex={0}
+                    className="btn btn-ghost btn-circle btn-sm"
+                  >
+                    <FaAngleDown />
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <a
+                        className="text-xs md:text-base"
+                        onClick={handleSortByClick}
+                      >
+                        Precio
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-xs md:text-base"
+                        onClick={handleSortByClick}
+                      >
+                        Nombre
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 gap-y-3 mt-2 pb-3">
-              {state.map((item, i) => (
+              {sortedData.map((item, i) => (
                 <CartItem item={item} key={i} />
               ))}
             </div>
           </div>
 
-          <div className="summary pb-10 pt-4 px-10 rounded-md shadow-lg border mx-auto">
+          <div className="summary pb-10 pt-4 px-10 rounded-md shadow-lg border md:mx-auto">
             <h2 className="text-lg font-semibold uppercase border-b-2">
               Resúmen
             </h2>
@@ -66,7 +127,7 @@ const Cart = () => {
                 <input
                   name="name"
                   type="text"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered max-w-xs input-sm"
                   required
                 />
               </div>
@@ -77,7 +138,7 @@ const Cart = () => {
                 <input
                   name="lastname"
                   type="text"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered w-full max-w-xs input-sm"
                   required
                 />
               </div>
@@ -88,7 +149,7 @@ const Cart = () => {
                 <input
                   name="email"
                   type="email"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered w-full max-w-xs input-sm"
                   required
                 />
               </div>
@@ -99,7 +160,7 @@ const Cart = () => {
                 <input
                   name="address"
                   type="text"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered w-full max-w-xs input-sm"
                   required
                 />
               </div>
@@ -110,7 +171,7 @@ const Cart = () => {
                 <input
                   name="phone"
                   type="text"
-                  className="input input-bordered w-full max-w-xs"
+                  className="input input-bordered w-full max-w-xs input-sm"
                   required
                 />
               </div>
