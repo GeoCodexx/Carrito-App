@@ -1,22 +1,57 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "../contexts/CartProvider";
 import { FaAngleDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import CartItem from "../components/CartItem";
 import Invoice from "../components/Invoice";
+import { InvoiceContext } from "../contexts/InvoiceProvider";
 
 const Cart = () => {
-  //const [l, setl] = useState(second)
+  const dialogRef = useRef();
   const { state, igv, subtotal, total } = useContext(CartContext);
+  //const { data, setData } = useContext(InvoiceContext);
+  const stylesHidden = {
+    '@media print': {
+      display: 'none !important',
+      '#buton-close-modal': { display: 'none !important' },
+    },
+  };
 
   const [sortBy, setSortBy] = useState("");
+
+  const [names, setNames] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
   //Función para abrir el modal que contiene la factura de la compra
   const handleSubmit = (e) => {
     e.preventDefault();
     window.modal_invoice.showModal();
-    console.log(e.target.value);
+    //funcion para enviar los datos al componente invoice que mostrara en un dialog la factura
+    //setData(formData);
+  };
+
+  //function para imprimir modal dialog
+  const handlePrintInvoice = () => {
+    // Copia solo el contenido del diálogo a una ventana de impresión
+    const invoiceContent = dialogRef.current.innerHTML;
+    //console.log(invoiceContent);
+    const printWindow = window.open("", "_blank");
+     
+    // Agrega un enlace al archivo de estilos de Tailwind CSS ya procesado
+    printWindow.document.write('<html><head><title>Factura</title>');
+    
+    printWindow.document.write('<link rel="stylesheet" href="./src/index.css">');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(invoiceContent);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    //console.log(printWindow);
+    printWindow.print();
+    printWindow.close();
   };
 
   // Función para ordenar los elementos por la propiedad "precio"
@@ -119,7 +154,7 @@ const Cart = () => {
               Resúmen
             </h2>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} autoComplete="off">
               <div className="form-control w-full max-w-xs">
                 <label className="label">
                   <span className="label-text">Nombres</span>
@@ -128,6 +163,8 @@ const Cart = () => {
                   name="name"
                   type="text"
                   className="input input-bordered max-w-xs input-sm"
+                  value={names}
+                  onChange={(e) => setNames(e.target.value)}
                   required
                 />
               </div>
@@ -139,6 +176,8 @@ const Cart = () => {
                   name="lastname"
                   type="text"
                   className="input input-bordered w-full max-w-xs input-sm"
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
                   required
                 />
               </div>
@@ -150,6 +189,8 @@ const Cart = () => {
                   name="email"
                   type="email"
                   className="input input-bordered w-full max-w-xs input-sm"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
@@ -161,6 +202,8 @@ const Cart = () => {
                   name="address"
                   type="text"
                   className="input input-bordered w-full max-w-xs input-sm"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
                   required
                 />
               </div>
@@ -172,19 +215,21 @@ const Cart = () => {
                   name="phone"
                   type="text"
                   className="input input-bordered w-full max-w-xs input-sm"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   required
                 />
               </div>
 
               <div className="totales-main w-full mt-3">
-                <div className="totales text-end">
+                <div className="totales text-end print:text-end">
                   <div className="border-b p-1">
                     subtotal: <span className="ml-3">{`S/${subtotal}`}</span>
                   </div>
                   <div className="pt-1">
                     IGV (18%): <span className="ml-4">{`S/${igv}`}</span>
                   </div>
-                  <div className="font-bold pb-1">
+                  <div className="font-bold pb-1 mt-1">
                     TOTAL: <span className="ml-3">{`S/${total}`}</span>
                   </div>
                 </div>
@@ -202,14 +247,27 @@ const Cart = () => {
         {/**MODAL  */}
         {/* You can open the modal using ID.showModal() method */}
         {/* <button className="btn" onClick={()=>window.my_modal_3.showModal()}>open modal</button> */}
-        <dialog id="modal_invoice" className="modal">
-          <form method="dialog" className="modal-box">
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-              ✕
-            </button>
-            <Invoice />
-          </form>
-        </dialog>
+        <div ref={dialogRef}>
+          <dialog id="modal_invoice" className="modal">
+            <form method="dialog" className="modal-box">
+              <button id="buton-close-modal" className="btn btn-sm btn-circle btn-ghost absolute right-0 top-1 no-print print:hidden" style={stylesHidden}>
+                ✕
+              </button>
+              <Invoice
+                names={names}
+                lastname={lastname}
+                email={email}
+                address={address}
+                phone={phone}
+                subtotal={subtotal}
+                igv={igv}
+                total={total}
+                products={state}
+                handlePrintInvoice={handlePrintInvoice}
+              />
+            </form>
+          </dialog>
+        </div>
       </div>
     </div>
   );

@@ -11,3 +11,9 @@
         font-family: Roboto, sans-serif;
     }
 }
+
+@media print{
+    .no-print, .no-print *{
+      display: none !important;
+    }
+  }

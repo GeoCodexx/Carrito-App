@@ -41,7 +41,7 @@ const Sidebar = () => {
           <div className="pt-1">
             IGV (18%): <span className="ml-4">{`S/${igv}`}</span>
           </div>
-          <div className="font-bold pb-1">
+          <div className="font-bold pb-1 mt-1">
             TOTAL: <span className="ml-3">{`S/${total}`}</span>
           </div>
         </div>
