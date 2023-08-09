@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import SearchFiltersButton from "./components/SearchFiltersButton";
 import Sidebar from "./components/Sidebar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -20,6 +22,7 @@ function App() {
         {!shouldHideFilter && <SearchFiltersButton />}
         {!shouldHideFilter && <Filter />}
         <MainRouter />
+        <ToastContainer />
         <Sidebar />
         <Footer />
       </div>

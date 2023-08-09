@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoMdRemove, IoMdAdd } from "react-icons/io";
 import { CartContext, types } from "../contexts/CartProvider";
+import { toast } from "react-toastify";
 
 const CartItem = ({ item }) => {
   const { id, title, image, price, amount } = item;
@@ -21,7 +22,9 @@ const CartItem = ({ item }) => {
       <div className="flex flex-col justify-center p-2 ml-4 md:max-w-[400px]">
         <div className="flex justify-between max-w-[120px] sm:min-w-[200px]">
           <div className="title-cart-item">
-            <Link className="text-xs uppercase font-medium"><span className="w-full">{title}</span></Link>
+            <Link className="text-xs uppercase font-medium">
+              <span className="w-full">{title}</span>
+            </Link>
           </div>
         </div>
 
@@ -56,7 +59,19 @@ const CartItem = ({ item }) => {
       {/**remove icon */}
       <div
         className="text-xl cursor-pointer px-1"
-        onClick={() => dispatch({ type: types.remove, payload: id })}
+        onClick={() => {
+          dispatch({ type: types.remove, payload: id });
+          toast.error("El artículo ha sido removido dal carrito", {
+            position: "bottom-center",
+            autoClose: 2200,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+          });
+        }}
       >
         <RiDeleteBin6Line className="text-gray-500 hover:text-red-500 transition" />
       </div>

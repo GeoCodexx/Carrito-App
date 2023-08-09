@@ -1,8 +1,8 @@
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-2 bg-base-300 text-base-content fixed bottom-0">
+    <footer className="footer footer-center p-1 bg-base-100 text-base-content fixed bottom-0">
       <div>
-        <p>GeoCodexx © 2023 - All right reserved by Geodi R.</p>
+        <p className="text-xs md:text-sm">GeoCodexx © 2023 - All right reserved by Geordi R.</p>
       </div>
     </footer>
   );

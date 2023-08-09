@@ -1,9 +1,28 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext, types } from "../contexts/CartProvider";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product, badge = false }) => {
   const { dispatch } = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    dispatch({
+      type: types.add,
+      payload: product,
+    });
+
+    toast.success("Agregado correctamente al carrito", {
+      position: "bottom-center",
+      autoClose: 2200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   return (
     <>
@@ -20,17 +39,16 @@ const ProductCard = ({ product, badge = false }) => {
           </figure>
         </Link>
         <div className="card-body">
-        {badge && <div className="badge badge-secondary">Nuevo</div>}
+          {badge && <div className="badge badge-secondary">Nuevo</div>}
           <Link to={`/product/${product.id}`}>
             <h2
               className={`card-title text-base ${
-                product.title.length <= 28 && 'mb-7'
+                product.title.length <= 28 && "mb-7"
               }`}
             >
               {product.title.length >= 45
                 ? `${product.title.substring(0, 45)}...`
                 : product.title}
-              
             </h2>
           </Link>
           <div className="card-actions justify-between">
@@ -40,13 +58,7 @@ const ProductCard = ({ product, badge = false }) => {
             {/**BUTTON BUY */}
             <button
               className="btn btn-primary relative"
-              onClick={
-                () =>
-                  dispatch({
-                    type: types.add,
-                    payload: product,
-                  }) /*addToCart(product)*/
-              }
+              onClick={handleAddToCart}
             >
               Agregar
             </button>

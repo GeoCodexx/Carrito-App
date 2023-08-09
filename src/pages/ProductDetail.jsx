@@ -1,14 +1,13 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext, types } from "../contexts/CartProvider";
-import { ProductContext } from "../contexts/ProductProvider";
 import SimilarProducts from "../components/SimilarProducts";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
+import { toast } from "react-toastify";
 
 const ProductDetail = () => {
   const [data, setData] = useState({});
   const [cant, setCant] = useState(1);
-  const [msg, setMsg] = useState("");
 
   //imagen principal del visor del producto
   //const [imageView, setImageView] = useState('');
@@ -17,8 +16,7 @@ const ProductDetail = () => {
 
   const { id } = useParams();
 
-  const { dispatch, alert } = useContext(CartContext);
-  //const { products } = useContext(ProductContext);
+  const { dispatch } = useContext(CartContext);
 
   //console.log(id);
   useEffect(() => {
@@ -45,7 +43,6 @@ const ProductDetail = () => {
     //Se volvera a montar cada vez que cambie el id
   }, [id]);
 
-
   //Gestionar las imagenes en miniatura
   const handleClickImage = (e) => {
     //console.log(e.target.src);
@@ -53,33 +50,32 @@ const ProductDetail = () => {
     //console.log(imageMainRef.current.src);
   };
 
+  const handleAddToCart = () => {
+    dispatch({
+      type: types.addDetail,
+      payload: { product: data, qty: cant },
+    });
+    toast.success("Agregado correctamente al carrito", {
+      position: "bottom-center",
+      autoClose: 2200,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
   return (
     <div className="main pb-10">
-      <div className="container mx-auto px-4 pt-20 mb-10 relative">
-        <div className="alert-msg absolute top-56 right-2">
-          <div className="alert alert-success">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="stroke-current shrink-0 h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <span>Your purchase has been confirmed!</span>
-          </div>
-        </div>
+      <div className="container mx-auto px-4 pt-20 mb-10">
         <div className="grid gird-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-2 shadow-md rounded-md p-4 border">
           <div className="image-section flex flex-col lg:flex-row justify-between border">
             <div className="thumbs flex flex-row lg:flex-col justify-evenly">
               {/**IMAGES ´PRODUCT */}
               <div
-                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -91,7 +87,7 @@ const ProductDetail = () => {
                 </figure>
               </div>
               <div
-                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -103,7 +99,7 @@ const ProductDetail = () => {
                 </figure>
               </div>
               <div
-                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -115,7 +111,7 @@ const ProductDetail = () => {
                 </figure>
               </div>
               <div
-                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -181,15 +177,7 @@ const ProductDetail = () => {
                 </button>
               </div>
               <div className="btn add-to-cart flex justify-center items-center ml-2">
-                <button
-                  className="btn btn-neutral"
-                  onClick={() =>
-                    dispatch({
-                      type: types.addDetail,
-                      payload: { product: data, qty: cant },
-                    })
-                  }
-                >
+                <button className="btn btn-neutral" onClick={handleAddToCart}>
                   Agregar
                 </button>
               </div>
