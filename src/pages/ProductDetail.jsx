@@ -8,15 +8,16 @@ import { IoMdAdd, IoMdRemove } from "react-icons/io";
 const ProductDetail = () => {
   const [data, setData] = useState({});
   const [cant, setCant] = useState(1);
-  
+  const [msg, setMsg] = useState("");
+
   //imagen principal del visor del producto
-  const [imageView, setImageView] = useState('');
+  //const [imageView, setImageView] = useState('');
 
   const imageMainRef = useRef();
 
   const { id } = useParams();
 
-  const { dispatch } = useContext(CartContext);
+  const { dispatch, alert } = useContext(CartContext);
   //const { products } = useContext(ProductContext);
 
   //console.log(id);
@@ -26,7 +27,7 @@ const ProductDetail = () => {
       try {
         const response = await fetch(`https://fakestoreapi.com/products/${id}`);
         const productData = await response.json();
-        
+
         //Se crea el objeto agregando una propiedad  "dscto"
         const addingDcto = {
           ...productData,
@@ -34,32 +35,53 @@ const ProductDetail = () => {
         };
 
         setData(addingDcto);
-
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
     };
-    //Se llama a la funcion 
+    //Se llama a la funcion
     getProductDetails();
 
     //Se volvera a montar cada vez que cambie el id
   }, [id]);
 
+
   //Gestionar las imagenes en miniatura
-  const handleClickImage = (e) => { 
+  const handleClickImage = (e) => {
     //console.log(e.target.src);
     imageMainRef.current.src = e.target.src;
     //console.log(imageMainRef.current.src);
-   }
+  };
 
   return (
     <div className="main pb-10">
-      <div className="container mx-auto px-4 pt-20 mb-10">
+      <div className="container mx-auto px-4 pt-20 mb-10 relative">
+        <div className="alert-msg absolute top-56 right-2">
+          <div className="alert alert-success">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="stroke-current shrink-0 h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Your purchase has been confirmed!</span>
+          </div>
+        </div>
         <div className="grid gird-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-2 shadow-md rounded-md p-4 border">
           <div className="image-section flex flex-col lg:flex-row justify-between border">
             <div className="thumbs flex flex-row lg:flex-col justify-evenly">
               {/**IMAGES ´PRODUCT */}
-              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
+              <div
+                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                onClick={handleClickImage}
+              >
                 <figure>
                   <img
                     className="group-hover:scale-110 transition duration-300 ease-in-out"
@@ -68,7 +90,10 @@ const ProductDetail = () => {
                   />
                 </figure>
               </div>
-              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
+              <div
+                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                onClick={handleClickImage}
+              >
                 <figure>
                   <img
                     className="group-hover:scale-110 transition duration-300 ease-in-out"
@@ -77,7 +102,10 @@ const ProductDetail = () => {
                   />
                 </figure>
               </div>
-              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
+              <div
+                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                onClick={handleClickImage}
+              >
                 <figure>
                   <img
                     className="group-hover:scale-110 transition duration-300 ease-in-out"
@@ -86,7 +114,10 @@ const ProductDetail = () => {
                   />
                 </figure>
               </div>
-              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
+              <div
+                className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                onClick={handleClickImage}
+              >
                 <figure>
                   <img
                     className="group-hover:scale-110 transition duration-300 ease-in-out"
@@ -100,7 +131,12 @@ const ProductDetail = () => {
             {/**MAIN IMAGE VIEW */}
             <div className="image order-first lg:order-last flex justify-center items-center py-3 rounded-md w-full sm:h-full">
               <figure>
-                <img ref={imageMainRef} className="max-h-52" src={data.image} alt={data.title} />
+                <img
+                  ref={imageMainRef}
+                  className="max-h-60 lg:max-h-64 lg:max-w-xs"
+                  src={data.image}
+                  alt={data.title}
+                />
               </figure>
             </div>
           </div>
@@ -117,12 +153,12 @@ const ProductDetail = () => {
               <span className="font-medium ml-1">{data.dscto}%</span>
             </p>
             <p className="text-justify mt-2">{data.description}</p>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center my-4">
               <p className="font-semibold mt-2 text-xl text-neutral">
-                S/{data.price}
+                S/{data.price?.toFixed(2)}
               </p>
             </div>
-            <div className="footer-details flex flex-col sm:flex-row items-center">
+            <div className="footer-details flex justify-center items-center md:justify-normal">
               <div className="amount-item flex items-center sm:border my-2 sm:my-0">
                 {/**Decrement item amount */}
                 <button
@@ -144,7 +180,7 @@ const ProductDetail = () => {
                   <IoMdAdd />
                 </button>
               </div>
-              <div className="btn add-to-cart mt-3">
+              <div className="btn add-to-cart flex justify-center items-center ml-2">
                 <button
                   className="btn btn-neutral"
                   onClick={() =>
@@ -154,7 +190,7 @@ const ProductDetail = () => {
                     })
                   }
                 >
-                  Agregar al carrito
+                  Agregar
                 </button>
               </div>
             </div>
