@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CartContext, types } from "../contexts/CartProvider";
 import { ProductContext } from "../contexts/ProductProvider";
@@ -8,6 +8,11 @@ import { IoMdAdd, IoMdRemove } from "react-icons/io";
 const ProductDetail = () => {
   const [data, setData] = useState({});
   const [cant, setCant] = useState(1);
+  
+  //imagen principal del visor del producto
+  const [imageView, setImageView] = useState('');
+
+  const imageMainRef = useRef();
 
   const { id } = useParams();
 
@@ -16,62 +21,86 @@ const ProductDetail = () => {
 
   //console.log(id);
   useEffect(() => {
-    //DATA PRODUCT
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((response) => response.json())
-      .then((product) => {
-        const addingDcto= {...product, dscto: Math.round(Math.random() * 20 + 10)}
+    //obtener los detalles del producto y productos similares
+    const getProductDetails = async () => {
+      try {
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+        const productData = await response.json();
+        
+        //Se crea el objeto agregando una propiedad  "dscto"
+        const addingDcto = {
+          ...productData,
+          dscto: Math.round(Math.random() * 20 + 10),
+        };
+
         setData(addingDcto);
-        //setIsLoading(false);
-      });
-  }, []);
+
+      } catch (error) {
+        console.error("Error fetching product details:", error);
+      }
+    };
+    //Se llama a la funcion 
+    getProductDetails();
+
+    //Se volvera a montar cada vez que cambie el id
+  }, [id]);
+
+  //Gestionar las imagenes en miniatura
+  const handleClickImage = (e) => { 
+    //console.log(e.target.src);
+    imageMainRef.current.src = e.target.src;
+    //console.log(imageMainRef.current.src);
+   }
 
   return (
     <div className="main pb-10">
       <div className="container mx-auto px-4 pt-20 mb-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 shadow-md rounded-md p-4 border">
-          <div className="image-section grid grid-cols-1 md:grid-cols-5 border">
-            <div className="thumbs col-span-1 flex flex-row md:flex-col justify-evenly">
-              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
+        <div className="grid gird-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-2 shadow-md rounded-md p-4 border">
+          <div className="image-section flex flex-col lg:flex-row justify-between border">
+            <div className="thumbs flex flex-row lg:flex-col justify-evenly">
+              {/**IMAGES ´PRODUCT */}
+              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
                 <figure>
                   <img
-                    className="group-hover:scale-150 transition duration-300 ease-in-out"
+                    className="group-hover:scale-110 transition duration-300 ease-in-out"
                     src={data.image}
                     alt={data.title}
                   />
                 </figure>
               </div>
-              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
+              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
                 <figure>
                   <img
-                    className="group-hover:scale-150 transition duration-300 ease-in-out"
+                    className="group-hover:scale-110 transition duration-300 ease-in-out"
                     src={data.image}
                     alt={data.title}
                   />
                 </figure>
               </div>
-              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
+              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
                 <figure>
                   <img
-                    className="group-hover:scale-150 transition duration-300 ease-in-out"
+                    className="group-hover:scale-110 transition duration-300 ease-in-out"
                     src={data.image}
                     alt={data.title}
                   />
                 </figure>
               </div>
-              <div className="p-4 w-1/4 sm:w-1/2 hover:border hover:shadow-md rounded-md group transition ease">
+              <div className="p-4 w-20 hover:border hover:shadow-md rounded-md group transition ease" onClick={handleClickImage}>
                 <figure>
                   <img
-                    className="group-hover:scale-150 transition duration-300 ease-in-out"
+                    className="group-hover:scale-110 transition duration-300 ease-in-out"
                     src={data.image}
                     alt={data.title}
                   />
                 </figure>
               </div>
             </div>
-            <div className="image order-first sm:order-last sm:col-span-4 flex justify-center items-center py-3 rounded-md">
+
+            {/**MAIN IMAGE VIEW */}
+            <div className="image order-first lg:order-last flex justify-center items-center py-3 rounded-md w-full sm:h-full">
               <figure>
-                <img className="max-h-48" src={data.image} alt={data.title} />
+                <img ref={imageMainRef} className="max-h-52" src={data.image} alt={data.title} />
               </figure>
             </div>
           </div>
@@ -85,14 +114,12 @@ const ProductDetail = () => {
             </div>
             <p className="badge badge-secondary ml-2">
               Dscto:
-              <span className="font-medium ml-1">
-                {data.dscto}%
-              </span>
+              <span className="font-medium ml-1">{data.dscto}%</span>
             </p>
             <p className="text-justify mt-2">{data.description}</p>
             <div className="flex justify-between items-center">
               <p className="font-semibold mt-2 text-xl text-neutral">
-                Precio: S/{data.price}
+                S/{data.price}
               </p>
             </div>
             <div className="footer-details flex flex-col sm:flex-row items-center">
@@ -100,7 +127,8 @@ const ProductDetail = () => {
                 {/**Decrement item amount */}
                 <button
                   className="btn btn-xs"
-                  onClick={() => setCant((state)=> state>1 ? state-1: 1)
+                  onClick={() =>
+                    setCant((state) => (state > 1 ? state - 1 : 1))
                   }
                 >
                   <IoMdRemove />
@@ -111,7 +139,7 @@ const ProductDetail = () => {
                 {/**Decrement item amount */}
                 <button
                   className="btn btn-xs"
-                  onClick={() => setCant(cant+1)}
+                  onClick={() => setCant(cant + 1)}
                 >
                   <IoMdAdd />
                 </button>
@@ -119,7 +147,12 @@ const ProductDetail = () => {
               <div className="btn add-to-cart mt-3">
                 <button
                   className="btn btn-neutral"
-                  onClick={() => dispatch({ type: types.addDetail, payload: {product:data, qty:cant} })}
+                  onClick={() =>
+                    dispatch({
+                      type: types.addDetail,
+                      payload: { product: data, qty: cant },
+                    })
+                  }
                 >
                   Agregar al carrito
                 </button>

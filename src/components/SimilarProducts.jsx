@@ -15,19 +15,19 @@ const SimilarProducts = ({ category, idProd }) => {
 
         setSimilar(similarProducts);
       });
-  }, [category]);
+  }, [category, idProd]);
 
   return (
     <>
       <h2 className="font-semibold text-xl">Artículos Similares</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 p-5 border shadow-md rounded-lg mt-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
         {similar.length > 0 ? (
           similar.map((item) => (
             <Link to={`/product/${item.id}`} key={item.id}>
-              <div className="border p-1 relative rounded-lg overflow-hidden group hover:shadow-lg h-full">
-                <figure className="h-3/5">
+              <div className="border py-4 relative rounded-lg overflow-hidden group hover:shadow-lg h-full">
+                <figure className="h-1/2">
                   <img
-                    className="max-h-[200px] max-w-[200px] mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
+                    className="max-h-[120px] max-w-[120px] mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
                     src={item.image}
                     alt={item.title}
                   />
@@ -35,9 +35,13 @@ const SimilarProducts = ({ category, idProd }) => {
                 {item.title.length <= 28 ? (
                   <p className="text-center my-2 px-2 mb-8">{item.title}</p>
                 ) : (
-                  <p className="text-center my-2 px-2">
-                    {item.title.length > 60
-                      ? `${item.title.substring(0, 50)}...`
+                  <p
+                    className={`text-center my-2 px-2 ${
+                      item.title.length <= 28 && "mb-7"
+                    }`}
+                  >
+                    {item.title.length >= 45
+                      ? `${item.title.substring(0, 45)}...`
                       : item.title}
                   </p>
                 )}
