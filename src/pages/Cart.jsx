@@ -1,11 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { CartContext } from "../contexts/CartProvider";
 import { FaAngleDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import CartItem from "../components/CartItem";
 import Invoice from "../components/Invoice";
-import { InvoiceContext } from "../contexts/InvoiceProvider";
 
 const Cart = () => {
   const dialogRef = useRef();
@@ -68,7 +67,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="main">
+    <div className="main h-screen">
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between mt-16 py-4">
           {/**icono */}
@@ -83,7 +82,7 @@ const Cart = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-20">
           <div className="list-items px-5 h-full mt-4">
-            <h2 className="text-lg font-semibold uppercase border-b-2">
+            <h2 className="text-lg font-semibold uppercase border-b-2 border-base-content">
               Lista de Productos
             </h2>
             <div className="flex justify-between items-center my-4">
@@ -128,19 +127,19 @@ const Cart = () => {
             </div>
 
             {/**CART PRODUCT LIST  */}
-            <div className="grid grid-cols-1 gap-y-3 mt-2 pb-3 xl:px-10">
+            <div className="grid grid-cols-1 mt-2 pb-3 xl:px-10">
               {sortedData.map((item, i) => (
                 <CartItem item={item} pageCart={true} key={i} />
               ))}
             </div>
           </div>
 
-          <div className="summary pb-10 pt-4 px-10 md:mx-auto">
-            <h2 className="text-lg font-semibold uppercase border-b-2">
-              Resúmen
+          <div className="summary pb-10 pt-4 px-10 md:mx-auto w-96">
+            <h2 className="text-lg font-semibold uppercase border-b-2 border-base-content">
+              Detalles de compra
             </h2>
 
-            <form onSubmit={handleSubmit} autoComplete="off">
+            <form onSubmit={handleSubmit} autoComplete="off" className="mt-8">
               <div className="form-control w-full max-w-xs">
                 <label className="label">
                   <span className="label-text">Nombres</span>
@@ -207,9 +206,9 @@ const Cart = () => {
                 />
               </div>
 
-              <div className="totales-main w-full mt-3">
+              <div className="totales-main w-full mt-14">
                 <div className="totales text-end print:text-end">
-                  <div className="border-b p-1">
+                  <div className="border-b p-1 border-base-content">
                     subtotal: <span className="ml-3">{`S/${subtotal}`}</span>
                   </div>
                   <div className="pt-1">

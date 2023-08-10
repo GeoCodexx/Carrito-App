@@ -95,8 +95,14 @@ const NavBar = () => {
     setRatingValue(0);
   };
 
-  // console.log(categoryFilter, priceFilter, ratingValue);
-  //console.log(location);
+  //close dropdown menu
+  const handleClickMenu = () => {
+    const elem = document.activeElement;
+    if(elem){
+      elem?.blur();
+    }
+  };
+
   return (
     <nav className="shadow-lg fixed z-10 w-full">
       <div className="navbar bg-base-100 lg:px-5">
@@ -110,13 +116,13 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li>
+              <li onClick={handleClickMenu}>
                 <Link to="/">Inicio</Link>
               </li>
-              <li>
+              <li onClick={handleClickMenu}>
                 <Link to="/news">Novedades</Link>
               </li>
-              <li>
+              <li onClick={handleClickMenu}>
                 <Link to="/bestsellers">Más Vendidos</Link>
               </li>
             </ul>
@@ -241,11 +247,11 @@ const NavBar = () => {
               className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
               <div className="card-body">
-                <span className="font-bold text-lg">{state.length} Items</span>
-                <span className="text-base">Subtotal: S/{subtotal}</span>
+                <span className="font-bold text-lg">{state.length} Artículo(s)</span>
+                <span className="fondt-semibold mb-2">Subtotal: S/{subtotal}</span>
                 <div className="card-actions">
                   <button
-                    className="btn btn-primary btn-block"
+                    className="btn btn-success btn-block"
                     onClick={() => setIsOpen(!isOpen)}
                   >
                     Ver Lista
@@ -257,7 +263,7 @@ const NavBar = () => {
 
           {/**BUTTON DARKMODE */}
           <div
-            className="tooltip tooltip-bottom"
+            className="tooltip tooltip-bottom hidden md:block"
             data-tip="Tema"
           >
             <div className="btn btn-circle btn-ghost ml-2">

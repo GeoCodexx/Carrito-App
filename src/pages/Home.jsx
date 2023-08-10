@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import ProductCard from "../components/ProductCard";
 import { ProductContext } from "../contexts/ProductProvider";
-import heroImage from "../assets/home-hero.svg"
+import heroImage from "../assets/carrito_compras_colorido.png"
 
 const Home = () => {
   const { products } = useContext(ProductContext);
-  //console.log(products);
+
   return (
     <div className="main">
       {/**HERO HOMEPAGE */}
@@ -14,15 +14,16 @@ const Home = () => {
           <div className="hero-content flex-col lg:flex-row">
             <img
               src={heroImage}
-              className="max-w-[280px] lg:max-w-lg rounded-lg shadow-2xl"
+              className="max-w-[250px] lg:max-w-lg rounded-lg shadow-2xl"
             />
             <div className="mt-8 md:mt-0">
               <h1 className="text-4xl md:text-5xl font-bold">Mini E-commerce!</h1>
               <p className="py-6">
-                Un proyecto elaborado con tecnologías modernas y robustas
-                tales como ReactJS; para el diseño de interface y la lógica, 
-                así como Tailwind CSS como framework para
-                el diseño web y otras librerías de componentes.
+                Proyecto elaborado con tecnologías modernas y robustas;
+                tales como ReactJS para el diseño de interfaces de usuario y Tailwind CSS como 
+                framework CSS que permite un desarrollo ágil, basado en clases de utilidad que se 
+                pueden aplicar con facilidad en el código HTML y unos flujos de desarrollo que 
+                permiten optimizar mucho el peso del código CSS.
               </p>
               <button className="btn btn-primary">Get Started</button>
             </div>

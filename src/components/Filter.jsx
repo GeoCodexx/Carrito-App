@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FilterContext } from "../contexts/FilterProvider";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { BiArrowFromRight } from "react-icons/bi";
 import { ProductContext } from "../contexts/ProductProvider";
 import { useNavigate } from "react-router-dom";
 
@@ -57,24 +57,23 @@ const Filter = () => {
     <div
       className={`${
         isOpenFilter ? "left-0" : "-left-full"
-      } w-full bg-base-200 fixed top-[68px] h-full shadow-2xl md:w-[350px] xl:max-w-[350px] transition-all delay-200 duration-500 z-20 px-4 lg:px-[35px] rounded-s-md select-none border-t`}
+      } w-full bg-base-200 fixed top-[68px] h-full shadow-2xl md:w-[350px] xl:max-w-[350px] transition-all delay-150 duration-500 z-20 px-4 lg:px-[35px] rounded-s-md select-none border-t`}
     >
       <div className="flex justify-between items-center border-b-2 my-4">
-
-      
-      {/**icono */}
-      <div
-        onClick={() => handleClose()}
-        className="flex justify-center items-center"
-        title="cerrar"
-      >
-        <button className="btn btn-ghost btn-circle">
-          <IoMdArrowRoundBack className="w-5 h-5"></IoMdArrowRoundBack>
-        </button>
+        <h2 className="text-lg font-semibold text-center">
+          FILTROS DE BÚSQUEDA
+        </h2>
+        {/**icono */}
+        <div
+          onClick={() => handleClose()}
+          className="flex justify-center items-center tooltip tooltip-bottom"
+          data-tip="Ocultar"
+        >
+          <button className="btn btn-ghost btn-circle">
+            <BiArrowFromRight className="w-6 h-6" />
+          </button>
+        </div>
       </div>
-      <h2 className="text-lg font-semibold text-center">
-        FILTROS DE BÚSQUEDA
-      </h2></div>
 
       <div className="mb-5">
         <label className="label mb-2">
@@ -177,7 +176,7 @@ const Filter = () => {
 
       <div className="flex flex-col justify-evenly mt-8 h-48">
         <button
-          className="btn btn-md"
+          className="btn btn-success"
           onClick={handleApplyFilter}
           disabled={
             categoryFilter !== "selected" ||
@@ -189,10 +188,10 @@ const Filter = () => {
         >
           Aplicar
         </button>
-        <button className="btn btn-md" onClick={handleCleanFilter}>
+        <button className="btn btn-ghost" onClick={handleCleanFilter}>
           Limpiar
         </button>
-        <button className="btn btn-md" onClick={() => handleClose()}>
+        <button className="btn btn-ghost" onClick={() => handleClose()}>
           Cerrar
         </button>
       </div>

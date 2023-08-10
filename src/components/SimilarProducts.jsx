@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { DarkModeContext } from "../contexts/DarkModeProvider";
 
 const SimilarProducts = ({ category, idProd }) => {
   const [similar, setSimilar] = useState([]);
+  const { darkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     //SIMILAR PRODUCTS
@@ -17,14 +19,23 @@ const SimilarProducts = ({ category, idProd }) => {
       });
   }, [category, idProd]);
 
+  //funcion para reubicar hacia arriba al usuario
+  const handlePositionTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <h2 className="font-semibold text-xl mb-4">Artículos Similares</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
         {similar.length > 0 ? (
           similar.map((item) => (
-            <Link to={`/product/${item.id}`} key={item.id}>
-              <div className="border py-4 relative rounded-lg overflow-hidden group hover:shadow-lg sm:h-full bg-base-100">
+            <Link
+              to={`/product/${item.id}`}
+              key={item.id}
+              onClick={handlePositionTop}
+            >
+              <div className={`${!darkMode && 'border'}  py-4 relative rounded-lg overflow-hidden group hover:shadow-lg sm:h-full bg-base-100`}>
                 <figure className="h-1/2 flex items-center">
                   <img
                     className="max-h-[120px] max-w-[120px] mx-auto group-hover:scale-110 transition duration-300 ease-in-out"

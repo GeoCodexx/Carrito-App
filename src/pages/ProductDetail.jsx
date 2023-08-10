@@ -4,21 +4,20 @@ import { CartContext, types } from "../contexts/CartProvider";
 import SimilarProducts from "../components/SimilarProducts";
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import { toast } from "react-toastify";
+import { DarkModeContext } from "../contexts/DarkModeProvider";
 
 const ProductDetail = () => {
   const [data, setData] = useState({});
   const [cant, setCant] = useState(1);
 
-  //imagen principal del visor del producto
-  //const [imageView, setImageView] = useState('');
 
   const imageMainRef = useRef();
 
   const { id } = useParams();
 
   const { dispatch } = useContext(CartContext);
+  const { darkMode } = useContext(DarkModeContext);
 
-  //console.log(id);
   useEffect(() => {
     //obtener los detalles del producto y productos similares
     const getProductDetails = async () => {
@@ -50,6 +49,7 @@ const ProductDetail = () => {
     //console.log(imageMainRef.current.src);
   };
 
+  //Funcion para agregar un producto al carrito
   const handleAddToCart = () => {
     dispatch({
       type: types.addDetail,
@@ -57,20 +57,20 @@ const ProductDetail = () => {
     });
     toast.success("Agregado correctamente al carrito", {
       position: "bottom-center",
-      autoClose: 2200,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: false,
       progress: undefined,
-      theme: "light",
+      theme: "dark",
     });
   };
 
   return (
     <div className="main pb-10">
       <div className="container mx-auto px-4 pt-20 mb-10">
-        <div className="grid gird-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-2 shadow-md rounded p-4 border bg-base-200">
+        <div className={`grid gird-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-2 shadow-md rounded p-4 ${!darkMode && 'border'} bg-base-200`}>
           <div className="image-section flex flex-col lg:flex-row justify-between rounded bg-base-100">
             <div className="thumbs flex flex-row lg:flex-col justify-evenly lg:ml-2">
               {/**IMAGES ´PRODUCT */}
@@ -158,7 +158,7 @@ const ProductDetail = () => {
               <div className="amount-item flex items-center my-2 sm:my-0">
                 {/**Decrement item amount */}
                 <button
-                  className="btn btn-xs"
+                  className="btn btn-sm bg-base-100"
                   onClick={() =>
                     setCant((state) => (state > 1 ? state - 1 : 1))
                   }
@@ -170,7 +170,7 @@ const ProductDetail = () => {
                 </div>
                 {/**Decrement item amount */}
                 <button
-                  className="btn btn-xs"
+                  className="btn btn-sm bg-base-100"
                   onClick={() => setCant(cant + 1)}
                 >
                   <IoMdAdd />

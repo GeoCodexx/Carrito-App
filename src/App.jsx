@@ -9,7 +9,8 @@ import Sidebar from "./components/Sidebar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DarkModeContext } from "./contexts/DarkModeProvider";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import ButtonToTop from "./components/ButtonToTop";
 
 function App() {
   const location = useLocation();
@@ -17,7 +18,18 @@ function App() {
     location.pathname.startsWith("/product/") ||
     location.pathname.startsWith("/cart");
 
+  const [scrollbtn, setScrollbtn] = useState(false);
   const { darkMode } = useContext(DarkModeContext);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 2560) {
+        setScrollbtn(true);
+      } else {
+        setScrollbtn(false);
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -32,6 +44,7 @@ function App() {
         <ToastContainer />
         <Sidebar />
         <Footer />
+        {scrollbtn && <ButtonToTop />}
       </div>
     </>
   );

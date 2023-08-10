@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { SidebarContext } from "../contexts/SidebarProvider";
-import { IoMdArrowForward } from "react-icons/io";
+import { BiArrowFromLeft } from "react-icons/bi";
 import { CartContext } from "../contexts/CartProvider";
 import CartItem from "./CartItem";
 import { Link } from "react-router-dom";
@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   const { isOpen, handleClose } = useContext(SidebarContext);
   const { state, igv, subtotal, total } = useContext(CartContext);
-  //console.log(useContext(CartContext));
 
   return (
     <div
@@ -17,14 +16,19 @@ const Sidebar = () => {
       } w-full bg-base-200 fixed top-0 h-full shadow-2xl md:w-[45vw]  lg:w-[40vw] xl:max-w-[30vw] transition-all duration-500 z-20 px-4 lg:px-[20px] rounded-s-md select-none`}
     >
       <div className="flex items-center justify-between py-2 border-b">
-        <div className="uppercase text-sm font-semibold">
-          Carrito de Compras ({state.length} arts.)
-        </div>
         {/**icono */}
-        <div onClick={handleClose} className="flex justify-center items-center">
+        <div
+          onClick={handleClose}
+          className="flex justify-center items-center tooltip tooltip-bottom"
+          data-tip="Ocultar"
+        >
           <button className="btn btn-ghost btn-circle">
-            <IoMdArrowForward className="w-6 h-6"></IoMdArrowForward>
+            <BiArrowFromLeft className="w-6 h-6" />
           </button>
+        </div>
+
+        <div className="text-sm md:text-base uppercase font-semibold md:mr-6">
+          Carrito de Compras ({state.length} arts.)
         </div>
       </div>
       <div className="mt-2 pb-3 border-b border-black/50 h-2/3 w-full overflow-y-auto">
@@ -46,7 +50,13 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="flex justify-center w-full mt-3 pb-2">
-          <Link to="/cart" className="btn btn-wide btn-outline" onClick={handleClose}>IR AL CARRITO</Link>
+          <Link
+            to="/cart"
+            className="btn btn-wide btn-outline"
+            onClick={handleClose}
+          >
+            IR AL CARRITO
+          </Link>
         </div>
       </div>
     </div>

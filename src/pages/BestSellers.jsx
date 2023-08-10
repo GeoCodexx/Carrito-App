@@ -6,7 +6,7 @@ const BestSellers = () => {
   const { products } = useContext(ProductContext);
   const bestSellers =  [...products].filter((item) => 4<=item.rating.rate && item.rating.rate<= 5);
   return (
-    <div className="main h-screen">
+    <div className="main h-full">
       <section className="py-10">
         <div className="container p-4 mx-auto relative mt-6">
           {/**SECTION PRODUCTS */}

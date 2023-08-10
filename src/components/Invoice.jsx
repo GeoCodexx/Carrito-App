@@ -1,5 +1,3 @@
-import logoImage from "../assets/logo-cart-96x96.svg";
-
 const Invoice = ({
   names,
   lastname,

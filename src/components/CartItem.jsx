@@ -4,14 +4,16 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoMdRemove, IoMdAdd } from "react-icons/io";
 import { CartContext, types } from "../contexts/CartProvider";
 import { toast } from "react-toastify";
+import { DarkModeContext } from "../contexts/DarkModeProvider";
 
 const CartItem = ({ item, pageCart = false }) => {
   const { id, title, image, price, amount } = item;
 
   const { dispatch } = useContext(CartContext);
+  const {darkMode} = useContext(DarkModeContext);
 
   return (
-    <div className={`flex ${!pageCart && 'justify-between'} bg-base-100 items-center ${!pageCart && 'md:justify-center'} rounded-md shadow-md border px-2 md:px-4 ${pageCart && 'w-[500px]'}`}>
+    <div className={`flex ${!pageCart && 'justify-between'} bg-base-100 items-center ${!pageCart && 'md:justify-center'} rounded-md ${!darkMode && 'shadow-md border'} px-2 md:px-4 ${pageCart && 'w-[500px]'} my-2`}>
       <div className="min-h-[120px] flex items-center px-1">
         {/**Image */}
         <Link to={`/product/${id}`}>
