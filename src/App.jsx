@@ -6,18 +6,25 @@ import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import SearchFiltersButton from "./components/SearchFiltersButton";
 import Sidebar from "./components/Sidebar";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { DarkModeContext } from "./contexts/DarkModeProvider";
+import { useContext } from "react";
 
 function App() {
-
   const location = useLocation();
-  const shouldHideFilter = location.pathname.startsWith("/product/") || location.pathname.startsWith("/cart");
+  const shouldHideFilter =
+    location.pathname.startsWith("/product/") ||
+    location.pathname.startsWith("/cart");
 
+  const { darkMode } = useContext(DarkModeContext);
 
   return (
     <>
-      <div className="relative">
+      <div
+        className="relative bg-base-300"
+        data-theme={darkMode ? "dark" : "light"}
+      >
         <NavBar />
         {!shouldHideFilter && <SearchFiltersButton />}
         {!shouldHideFilter && <Filter />}

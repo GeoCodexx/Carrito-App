@@ -26,7 +26,7 @@ const ProductCard = ({ product, badge = false }) => {
 
   return (
     <>
-      <div className="card bg-base-100 hover:shadow-xl border border-[#e4e4e4] relative group select-none">
+      <div className="card bg-base-100 hover:shadow-xl  relative group select-none">
         <Link to={`/product/${product.id}`}>
           <figure>
             <div className="h-[180px] max-w-[200px] mx-auto pt-4 flex justify-center items-center">

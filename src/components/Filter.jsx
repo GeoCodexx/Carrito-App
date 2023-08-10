@@ -31,7 +31,6 @@ const Filter = () => {
   const handleRatingChange = (event) => {
     // Obtenemos el valor del input seleccionado (1 al 5) al leer el atributo "value" del input.
     const selectedRating = parseInt(event.target.value);
-    console.log("Rating:", event.target.value);
     setRatingValue(selectedRating);
   };
 
@@ -58,7 +57,7 @@ const Filter = () => {
     <div
       className={`${
         isOpenFilter ? "left-0" : "-left-full"
-      } w-full bg-white fixed top-[68px] h-full shadow-2xl md:w-[350px] xl:max-w-[350px] transition-all delay-200 duration-500 z-20 px-4 lg:px-[35px] rounded-s-md select-none border-t`}
+      } w-full bg-base-200 fixed top-[68px] h-full shadow-2xl md:w-[350px] xl:max-w-[350px] transition-all delay-200 duration-500 z-20 px-4 lg:px-[35px] rounded-s-md select-none border-t`}
     >
       <div className="flex justify-between items-center border-b-2 my-4">
 
@@ -83,7 +82,6 @@ const Filter = () => {
         </label>
         <select
           className="select select-bordered select-sm w-full max-w-xs"
-          //defaultValue="selected"
           value={categoryFilter}
           onChange={handleCategoryInput}
         >
@@ -91,7 +89,7 @@ const Filter = () => {
             Seleccione una opción
           </option>
           <option value="men's clothing">Men's clothing</option>
-          <option value="jewerly">Jewelery</option>
+          <option value="jewelery">Jewelery</option>
           <option value="electronics">Electronics</option>
           <option value="women's clothing">Women's clothing</option>
         </select>

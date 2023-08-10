@@ -70,12 +70,12 @@ const ProductDetail = () => {
   return (
     <div className="main pb-10">
       <div className="container mx-auto px-4 pt-20 mb-10">
-        <div className="grid gird-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-2 shadow-md rounded-md p-4 border">
-          <div className="image-section flex flex-col lg:flex-row justify-between border">
-            <div className="thumbs flex flex-row lg:flex-col justify-evenly">
+        <div className="grid gird-cols-1 md:grid-cols-2 sm:grid-cols-2 gap-2 shadow-md rounded p-4 border bg-base-200">
+          <div className="image-section flex flex-col lg:flex-row justify-between rounded bg-base-100">
+            <div className="thumbs flex flex-row lg:flex-col justify-evenly lg:ml-2">
               {/**IMAGES ´PRODUCT */}
               <div
-                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease cursor-pointer"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -87,7 +87,7 @@ const ProductDetail = () => {
                 </figure>
               </div>
               <div
-                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease cursor-pointer"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -99,7 +99,7 @@ const ProductDetail = () => {
                 </figure>
               </div>
               <div
-                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease cursor-pointer"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -111,7 +111,7 @@ const ProductDetail = () => {
                 </figure>
               </div>
               <div
-                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease"
+                className="p-4 w-16 md:w-20 hover:border hover:shadow-md rounded-md group transition ease cursor-pointer"
                 onClick={handleClickImage}
               >
                 <figure>
@@ -137,7 +137,7 @@ const ProductDetail = () => {
             </div>
           </div>
 
-          <div className="details border rounded-md p-4 mb-3">
+          <div className="details  rounded-md p-4 mb-3">
             <p className="font-bold text-lg sm:text-xl uppercase mb-2 text-center sm:text-left">
               {data.title}
             </p>
@@ -150,12 +150,12 @@ const ProductDetail = () => {
             </p>
             <p className="text-justify mt-2">{data.description}</p>
             <div className="flex justify-between items-center my-4">
-              <p className="font-semibold mt-2 text-xl text-neutral">
+              <p className="font-semibold mt-2 text-xl">
                 S/{data.price?.toFixed(2)}
               </p>
             </div>
             <div className="footer-details flex justify-center items-center md:justify-normal">
-              <div className="amount-item flex items-center sm:border my-2 sm:my-0">
+              <div className="amount-item flex items-center my-2 sm:my-0">
                 {/**Decrement item amount */}
                 <button
                   className="btn btn-xs"

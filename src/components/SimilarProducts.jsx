@@ -24,7 +24,7 @@ const SimilarProducts = ({ category, idProd }) => {
         {similar.length > 0 ? (
           similar.map((item) => (
             <Link to={`/product/${item.id}`} key={item.id}>
-              <div className="border py-4 relative rounded-lg overflow-hidden group hover:shadow-lg h-full">
+              <div className="border py-4 relative rounded-lg overflow-hidden group hover:shadow-lg sm:h-full bg-base-100">
                 <figure className="h-1/2 flex items-center">
                   <img
                     className="max-h-[120px] max-w-[120px] mx-auto group-hover:scale-110 transition duration-300 ease-in-out"
@@ -33,10 +33,10 @@ const SimilarProducts = ({ category, idProd }) => {
                   />
                 </figure>
                 {item.title.length <= 28 ? (
-                  <p className="text-center my-2 px-2">{item.title}</p>
+                  <p className="text-center my-2 px-2 h-12">{item.title}</p>
                 ) : (
                   <p
-                    className={`text-center my-2 px-2 ${
+                    className={`text-center h-12 my-2 px-2 ${
                       item.title.length <= 28 && "mb-7"
                     }`}
                   >
@@ -56,7 +56,7 @@ const SimilarProducts = ({ category, idProd }) => {
                     S/{item.price.toFixed(2)}
                   </p>
                 </div>
-                <p className="text-center mt-1">
+                <p className="text-center mt-1 text-secondary text-sm font-semibold">
                   Vendidos: {item.rating.count}
                 </p>
               </div>

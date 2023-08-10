@@ -72,12 +72,13 @@ const Cart = () => {
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between mt-16 py-4">
           {/**icono */}
-          <div className="flex justify-center items-center">
-            <Link to="/" className="btn btn-ghost btn-circle">
+          <Link to="/">
+            <div className="btn btn-ghost">
               <IoMdArrowRoundBack className="w-6 h-6" />
-            </Link>
-            <span className="ml-1">Seguir comprando</span>
-          </div>
+
+              <span className="ml-1">Seguir comprando</span>
+            </div>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-20">
@@ -107,7 +108,7 @@ const Cart = () => {
                   >
                     <li>
                       <a
-                        className="text-xs md:text-base"
+                        className="text-xs md:text-sm"
                         onClick={handleSortByClick}
                       >
                         Precio
@@ -115,7 +116,7 @@ const Cart = () => {
                     </li>
                     <li>
                       <a
-                        className="text-xs md:text-base"
+                        className="text-xs md:text-sm"
                         onClick={handleSortByClick}
                       >
                         Nombre
@@ -126,14 +127,15 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-y-3 mt-2 pb-3">
+            {/**CART PRODUCT LIST  */}
+            <div className="grid grid-cols-1 gap-y-3 mt-2 pb-3 xl:px-10">
               {sortedData.map((item, i) => (
-                <CartItem item={item} key={i} />
+                <CartItem item={item} pageCart={true} key={i} />
               ))}
             </div>
           </div>
 
-          <div className="summary pb-10 pt-4 px-10 rounded-md shadow-lg border md:mx-auto">
+          <div className="summary pb-10 pt-4 px-10 md:mx-auto">
             <h2 className="text-lg font-semibold uppercase border-b-2">
               Resúmen
             </h2>

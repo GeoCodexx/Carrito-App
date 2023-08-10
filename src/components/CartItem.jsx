@@ -5,24 +5,28 @@ import { IoMdRemove, IoMdAdd } from "react-icons/io";
 import { CartContext, types } from "../contexts/CartProvider";
 import { toast } from "react-toastify";
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, pageCart = false }) => {
   const { id, title, image, price, amount } = item;
 
   const { dispatch } = useContext(CartContext);
 
   return (
-    <div className="flex justify-between items-center rounded-md shadow-md border px-2 md:px-4 relative">
+    <div className={`flex ${!pageCart && 'justify-between'} bg-base-100 items-center ${!pageCart && 'md:justify-center'} rounded-md shadow-md border px-2 md:px-4 ${pageCart && 'w-[500px]'}`}>
       <div className="min-h-[120px] flex items-center px-1">
         {/**Image */}
         <Link to={`/product/${id}`}>
           <img className="max-w-[60px]" src={image} alt={title} />
         </Link>
       </div>
-      {/**title and remove icon*/}
-      <div className="flex flex-col justify-center p-2 ml-4 md:max-w-[400px]">
-        <div className="flex justify-between max-w-[120px] sm:min-w-[200px]">
+      {/**title*/}
+      <div className={`${pageCart && 'w-[338px]'} flex flex-col justify-center p-2 ml-4 md:max-w-[400px]`}>
+        <div
+          className={`flex justify-between ${
+            pageCart ? "w-full" : "max-w-[120px]"
+          }  sm:min-w-[150px]`}
+        >
           <div className="title-cart-item">
-            <Link className="text-xs uppercase font-medium">
+            <Link to={`/product/${id}`} className="text-xs uppercase font-medium">
               <span className="w-full">{title}</span>
             </Link>
           </div>
@@ -50,7 +54,7 @@ const CartItem = ({ item }) => {
               <IoMdAdd />
             </button>
           </div>
-          <div className="costs ml-2">
+          <div className="costs ml-2 text-secondary">
             {/**total */}
             <div>{`S/ ${parseFloat(price * amount).toFixed(2)}`}</div>
           </div>
@@ -58,7 +62,8 @@ const CartItem = ({ item }) => {
       </div>
       {/**remove icon */}
       <div
-        className="text-xl cursor-pointer px-1 absolute top-1 right-0"
+        className="cursor-pointer px-1 tooltip tooltip-left"
+        data-tip="Quitar"
         onClick={() => {
           dispatch({ type: types.remove, payload: id });
           toast.error("Producto removido correctamente", {
@@ -73,7 +78,7 @@ const CartItem = ({ item }) => {
           });
         }}
       >
-        <RiDeleteBin6Line className="text-gray-500 hover:text-red-500 transition" />
+        <RiDeleteBin6Line className="w-5 h-5 text-gray-500 hover:text-red-500 transition" />
       </div>
     </div>
   );
