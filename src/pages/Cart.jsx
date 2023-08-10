@@ -12,9 +12,9 @@ const Cart = () => {
   const { state, igv, subtotal, total } = useContext(CartContext);
   //const { data, setData } = useContext(InvoiceContext);
   const stylesHidden = {
-    '@media print': {
-      display: 'none !important',
-      '#buton-close-modal': { display: 'none !important' },
+    "@media print": {
+      display: "none !important",
+      "#buton-close-modal": { display: "none !important" },
     },
   };
 
@@ -30,28 +30,12 @@ const Cart = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     window.modal_invoice.showModal();
-    //funcion para enviar los datos al componente invoice que mostrara en un dialog la factura
-    //setData(formData);
   };
 
   //function para imprimir modal dialog
   const handlePrintInvoice = () => {
-    // Copia solo el contenido del diálogo a una ventana de impresión
-    const invoiceContent = dialogRef.current.innerHTML;
-    //console.log(invoiceContent);
-    const printWindow = window.open("", "_blank");
-     
-    // Agrega un enlace al archivo de estilos de Tailwind CSS ya procesado
-    printWindow.document.write('<html><head><title>Factura</title>');
-    
-    printWindow.document.write('<link rel="stylesheet" href="./src/index.css">');
-    printWindow.document.write('</head><body>');
-    printWindow.document.write(invoiceContent);
-    printWindow.document.write('</body></html>');
-    printWindow.document.close();
-    //console.log(printWindow);
-    printWindow.print();
-    printWindow.close();
+    window.print();
+    //printWindow.close();
   };
 
   // Función para ordenar los elementos por la propiedad "precio"
@@ -250,9 +234,9 @@ const Cart = () => {
         <div ref={dialogRef}>
           <dialog id="modal_invoice" className="modal">
             <form method="dialog" className="modal-box">
-              <button id="buton-close-modal" className="btn btn-sm btn-circle btn-ghost absolute right-0 top-1 no-print print:hidden" style={stylesHidden}>
+              {/* <button className="btn btn-xs btn-circle btn-ghost absolute right-1 top-1 print:hidden">
                 ✕
-              </button>
+              </button> */}
               <Invoice
                 names={names}
                 lastname={lastname}

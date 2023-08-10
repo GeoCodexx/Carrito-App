@@ -12,16 +12,8 @@ const Invoice = ({
   products,
   handlePrintInvoice,
 }) => {
-  // Objeto de estilos para ocultar el elemento en la impresión
-  const styles = {
-    '@media print': {
-      display: 'none !important',
-      '#buton-print-modal': { display: 'none !important' },
-    },
-  };
-
   return (
-    <><div className="no-print" style={{styles}}>hola pruebita</div>
+    <>
       <div className="p-4 bg-gray-100">
         <div className="mx-auto bg-white shadow-md p-8 rounded-lg overflow-hidden">
           {/**LOGO */}
@@ -104,14 +96,14 @@ const Invoice = ({
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center mt-1">
+      <div className="flex justify-center items-center mt-1 print:hidden">
         <button
-        id="buton-print-modal"
-          className="btn btn-neutral no-print"
+          className="btn btn-neutral"
           onClick={() => handlePrintInvoice()}
         >
           Imprimir
         </button>
+        <button className="btn ml-4">Cerrar</button>
       </div>
     </>
   );
