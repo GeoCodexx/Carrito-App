@@ -200,7 +200,8 @@ const NavBar = () => {
           <div
             className={`${
               isOpen && "hidden"
-            } hidden md:inline-block dropdown dropdown-end sm:ml-2`}
+            } hidden md:inline-block dropdown dropdown-end sm:ml-2 tooltip tooltip-left`}
+            data-tip="Carrito de compras"
           >
             <label tabIndex={0} className="btn btn-ghost btn-circle">
               <div className="indicator">

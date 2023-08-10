@@ -11,7 +11,7 @@ const CartItem = ({ item }) => {
   const { dispatch } = useContext(CartContext);
 
   return (
-    <div className="flex justify-between items-center rounded-md shadow-md border px-2 md:px-4">
+    <div className="flex justify-between items-center rounded-md shadow-md border px-2 md:px-4 relative">
       <div className="min-h-[120px] flex items-center px-1">
         {/**Image */}
         <Link to={`/product/${id}`}>
@@ -58,18 +58,18 @@ const CartItem = ({ item }) => {
       </div>
       {/**remove icon */}
       <div
-        className="text-xl cursor-pointer px-1"
+        className="text-xl cursor-pointer px-1 absolute top-1 right-0"
         onClick={() => {
           dispatch({ type: types.remove, payload: id });
-          toast.error("El artículo ha sido removido dal carrito", {
+          toast.error("Producto removido correctamente", {
             position: "bottom-center",
-            autoClose: 2200,
+            autoClose: 1500,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: false,
             progress: undefined,
-            theme: "light",
+            theme: "dark",
           });
         }}
       >

@@ -34,8 +34,7 @@ const Invoice = ({
               NOMBRE: {`${names.toUpperCase()} ${lastname.toUpperCase()}`}
             </p>
             <p
-              className="text-gray-700 md:hidden no-print print:hidden"
-              style={styles}
+              className="text-gray-700 md:hidden print:hidden"
             >
               EMAIL:
               {email.length > 15

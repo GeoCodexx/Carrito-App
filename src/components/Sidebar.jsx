@@ -27,7 +27,7 @@ const Sidebar = () => {
           </button>
         </div>
       </div>
-      <div className="mt-2 pb-3 border-b border-black/50 h-2/3 overflow-y-auto">
+      <div className="mt-2 pb-3 border-b border-black/50 h-2/3 w-full overflow-y-auto">
         {state.map((item, i) => (
           <CartItem item={item} key={i} />
         ))}

@@ -14,7 +14,7 @@ const Home = () => {
           <div className="hero-content flex-col lg:flex-row">
             <img
               src={heroImage}
-              className="max-w-[280px] lg:max-w-xl rounded-lg shadow-2xl"
+              className="max-w-[280px] lg:max-w-lg rounded-lg shadow-2xl"
             />
             <div className="mt-8 md:mt-0">
               <h1 className="text-4xl md:text-5xl font-bold">Mini E-commerce!</h1>
