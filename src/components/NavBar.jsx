@@ -452,7 +452,7 @@ const NavBar = () => {
           <div className="modal-action justify-center">
             <label
               htmlFor="my_modal_6"
-              className="btn btn-sm"
+              className="btn btn-sm btn-success"
               onClick={handleApplyFilter}
               disabled={
                 categoryFilter !== "selected" ||
@@ -466,12 +466,12 @@ const NavBar = () => {
             </label>
             <label
               htmlFor="my_modal_6"
-              className="btn btn-sm"
+              className="btn btn-sm btn-ghost"
               onClick={handleCleanFilter}
             >
               Limpiar
             </label>
-            <button className="btn btn-sm">Cerrar</button>
+            <button className="btn btn-sm btn-ghost">Cerrar</button>
           </div>
           {/* <div className="flex justify-center">
           <button className="btn ">Aplicar</button>

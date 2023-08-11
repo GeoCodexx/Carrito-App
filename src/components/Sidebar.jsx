@@ -13,7 +13,7 @@ const Sidebar = () => {
     <div
       className={`${
         isOpen ? "right-0" : "-right-full"
-      } w-full bg-base-200 fixed top-0 h-full shadow-2xl md:w-[45vw]  lg:w-[40vw] xl:max-w-[30vw] transition-all duration-500 z-20 px-4 lg:px-[20px] rounded-s-md select-none`}
+      } w-full bg-base-200 fixed top-0 h-screen shadow-2xl md:w-[45vw]  lg:w-[40vw] xl:max-w-[30vw] transition-all duration-500 z-50 px-4 lg:px-[20px] rounded-s-md select-none`}
     >
       <div className="flex items-center justify-between py-2 border-b">
         {/**icono */}
@@ -31,7 +31,7 @@ const Sidebar = () => {
           Carrito de Compras ({state.length} arts.)
         </div>
       </div>
-      <div className="mt-2 pb-3 border-b border-black/50 h-2/3 w-full overflow-y-auto">
+      <div className="mt-2 pb-3 border-b border-black/50 h-3/5 w-full overflow-y-auto">
         {state.map((item, i) => (
           <CartItem item={item} key={i} />
         ))}

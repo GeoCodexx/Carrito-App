@@ -27,7 +27,7 @@ const SimilarProducts = ({ category, idProd }) => {
   return (
     <>
       <h2 className="font-semibold text-xl mb-4">Artículos Similares</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:gap-3 px-8 sm:px-4">
         {similar.length > 0 ? (
           similar.map((item) => (
             <Link
