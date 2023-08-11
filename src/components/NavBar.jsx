@@ -38,33 +38,22 @@ const NavBar = () => {
     return () => clearTimeout(getData);
   }, [search]);
 
-  /*const handleSubmit = () => {
-    //console.log(search);
-    search !== "" && setSearchWord(search);
-  };*/
-
   const handleClickSearch = () => {
     window.modal_search.showModal();
     inputSearchRef.current.focus();
   };
 
   const handleClickFilter = () => {
-    /*setCategoryFilter("selected");
-    setPriceFilter(0);
-    setRatingValue(0);*/
     window.modal_filter.showModal();
-    //inputSearchRef.current.focus();
   };
 
   /**HANDLE CATEFOY FILTER */
   const handleCategoryInput = (e) => {
-    //console.log(e.target.value);
     setCategoryFilter(e.target.value);
   };
 
   /**HANDLE PRICE RANGE FILTER */
   const handlePrice = (e) => {
-    //console.log(e.target.value);
     setPriceFilter(e.target.value);
   };
 
@@ -78,18 +67,13 @@ const NavBar = () => {
 
   /**APPLY FILTER OPTIONS*/
   const handleApplyFilter = () => {
-    //console.log("Aplicando cambios filtro");
-    setFilterProducts(
-      categoryFilter,
-      priceFilter,
-      ratingValue /*, location.pathname*/
-    );
+    setFilterProducts(categoryFilter, priceFilter, ratingValue);
+    window.modal_filter.close();
     navegar("/filteredproducts");
   };
 
   /**CLEAN FILTER OPTIONS */
   const handleCleanFilter = () => {
-    //console.log("Limpiar filtro");
     setCategoryFilter("selected");
     setPriceFilter(0);
     setRatingValue(0);
@@ -98,9 +82,19 @@ const NavBar = () => {
   //close dropdown menu
   const handleClickMenu = () => {
     const elem = document.activeElement;
-    if(elem){
+    if (elem) {
       elem?.blur();
     }
+  };
+
+  const handleDialogSearch = () => {
+    window.modal_search.close();
+    setSearch("");
+  };
+
+  const handleDialogFilter = () => {
+    window.modal_filter.close();
+    //setSearch("");
   };
 
   return (
@@ -247,8 +241,12 @@ const NavBar = () => {
               className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
               <div className="card-body">
-                <span className="font-bold text-lg">{state.length} Artículo(s)</span>
-                <span className="fondt-semibold mb-2">Subtotal: S/{subtotal}</span>
+                <span className="font-bold text-lg">
+                  {state.length} Artículo(s)
+                </span>
+                <span className="fondt-semibold mb-2">
+                  Subtotal: S/{subtotal}
+                </span>
                 <div className="card-actions">
                   <button
                     className="btn btn-success btn-block"
@@ -269,7 +267,7 @@ const NavBar = () => {
             <div className="btn btn-circle btn-ghost ml-2">
               <label className="swap swap-rotate">
                 {/* this hidden checkbox controls the state */}
-                <input type="checkbox" onClick={toggleDarkMode}/>
+                <input type="checkbox" onClick={toggleDarkMode} />
 
                 {/* sun icon */}
                 <svg
@@ -294,38 +292,37 @@ const NavBar = () => {
         </div>
       </div>
       {/**DIALOG SEARCH PRODUCT */}
-      <dialog
-        id="modal_search"
-        className="modal modal-top top-[66px] sm:modal-middle"
-      >
-        <form method="dialog" className="modal-box">
+      <dialog id="modal_search" className="modal modal-top sm:modal-middle">
+        <form method="dialog" className="modal-box bg-base-200">
           {/**BTN CLOSE DIALOG */}
           <button className="btn btn-sm btn-circle btn-ghost absolute right-1 top-1">
             ✕
           </button>
           <div className="form-control mt-2 ">
-            <label className="">Buscador de artículos:</label>
+            <label className="font-semibold -mt-4 mb-2">
+              Buscador de artículos:
+            </label>
             <div className="flex justify-center items-center px-2 ml-1 mt-2">
               <MdSearch className="-mr-10 z-10 text-gray-500" />
               <input
                 ref={inputSearchRef}
                 type="search"
                 placeholder="Buscar..."
-                className="input input-bordered input-sm w-full md:w-auto ml-5 pl-6"
+                className="input input-bordered input-sm  w-full md:w-auto ml-5 pl-6"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             {/**RESULT BOX */}
-            <div className="px-3 text-sm">
+            <div className="px-3 text-sm mt-3">
               <ul
                 className={`p-2 shadow-lg menu dropdown-content z-[1] bg-base-100 rounded-b-md ${
                   search === "" && "hidden"
                 }`}
               >
                 {result.map((r, i) => (
-                  <li key={i} className="">
-                    <Link to={`/product/${r.id}`}>
+                  <li key={i}>
+                    <Link to={`/product/${r.id}`} onClick={handleDialogSearch}>
                       {r.title.length > 29
                         ? `${r.title.substring(0, 29)}...`
                         : r.title}
@@ -340,12 +337,12 @@ const NavBar = () => {
 
       {/**DIALOG FILTER PRODUCT */}
       <dialog id="modal_filter" className="modal modal-top sm:modal-middle">
-        <form method="dialog" className="modal-box">
+        <form method="dialog" className="modal-box bg-base-200">
           {/**BTN CLOSE DIALOG */}
           <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
             ✕
           </button>
-          <h2 className="font-medium">Filtros de Busqueda</h2>
+          <h2 className="font-medium uppercase text-center">Filtros de Busqueda</h2>
           <hr />
           {/* SELECT CATEGORY INPUT */}
           <div className="form-control mt-2 ">
@@ -362,7 +359,7 @@ const NavBar = () => {
                 Seleccione una opción
               </option>
               <option value="men's clothing">Men's clothing</option>
-              <option value="jewerly">Jewelery</option>
+              <option value="jewelery">Jewelery</option>
               <option value="electronics">Electronics</option>
               <option value="women's clothing">Women's clothing</option>
             </select>
@@ -452,7 +449,7 @@ const NavBar = () => {
           <div className="modal-action justify-center">
             <label
               htmlFor="my_modal_6"
-              className="btn btn-sm btn-success"
+              className="btn btn-sm btn-primary normal-case"
               onClick={handleApplyFilter}
               disabled={
                 categoryFilter !== "selected" ||
@@ -466,12 +463,12 @@ const NavBar = () => {
             </label>
             <label
               htmlFor="my_modal_6"
-              className="btn btn-sm btn-ghost"
+              className="btn btn-sm btn-ghost normal-case"
               onClick={handleCleanFilter}
             >
               Limpiar
             </label>
-            <button className="btn btn-sm btn-ghost">Cerrar</button>
+            <button className="btn btn-sm btn-ghost normal-case">Cerrar</button>
           </div>
           {/* <div className="flex justify-center">
           <button className="btn ">Aplicar</button>

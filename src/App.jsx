@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 2560) {
+      if (window.scrollY > 2000) {
         setScrollbtn(true);
       } else {
         setScrollbtn(false);

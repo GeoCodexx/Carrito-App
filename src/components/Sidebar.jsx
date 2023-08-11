@@ -15,7 +15,7 @@ const Sidebar = () => {
         isOpen ? "right-0" : "-right-full"
       } w-full bg-base-200 fixed top-0 h-screen shadow-2xl md:w-[45vw]  lg:w-[40vw] xl:max-w-[30vw] transition-all duration-500 z-50 px-4 lg:px-[20px] rounded-s-md select-none`}
     >
-      <div className="flex items-center justify-between py-2 border-b">
+      <div className="flex items-center justify-between py-2">
         {/**icono */}
         <div
           onClick={handleClose}
@@ -31,7 +31,7 @@ const Sidebar = () => {
           Carrito de Compras ({state.length} arts.)
         </div>
       </div>
-      <div className="mt-2 pb-3 border-b border-black/50 h-3/5 w-full overflow-y-auto">
+      <div className="mt-2 pb-3 border-b border-base-content h-3/5 w-full overflow-y-auto">
         {state.map((item, i) => (
           <CartItem item={item} key={i} />
         ))}
@@ -39,10 +39,10 @@ const Sidebar = () => {
 
       <div className="totales-main w-full mt-1">
         <div className="totales text-end">
-          <div className="border-b p-1">
+          <div className="p-1">
             subtotal: <span className="ml-3">{`S/${subtotal}`}</span>
           </div>
-          <div className="pt-1">
+          <div className="p-1">
             IGV (18%): <span className="ml-4">{`S/${igv}`}</span>
           </div>
           <div className="font-bold pb-1 mt-1">

@@ -57,7 +57,7 @@ const Filter = () => {
     <div
       className={`${
         isOpenFilter ? "left-0" : "-left-full"
-      } w-full bg-base-200 fixed top-[68px] h-full shadow-2xl md:w-[350px] xl:max-w-[350px] transition-all delay-150 duration-500 z-20 px-4 lg:px-[35px] rounded-s-md select-none border-t`}
+      } w-full bg-base-200 fixed top-[68px] h-full shadow-2xl md:w-[350px] xl:max-w-[350px] transition-all delay-150 duration-500 z-20 px-4 lg:px-[35px] rounded-s-md select-none`}
     >
       <div className="flex justify-between items-center border-b-2 my-4">
         <h2 className="text-lg font-semibold text-center">
