@@ -3,12 +3,11 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "homepage": "https://geocodexx.github.io/carrito-app",
+
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "dev": "vite --host",
-    "build": "vite build --base=https://geocodexx.github.io/carrito-app",
+
+    "dev": "vite",
+    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

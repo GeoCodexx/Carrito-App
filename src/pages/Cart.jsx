@@ -67,7 +67,7 @@ const Cart = () => {
   }
 
   return (
-    <div className="main h-screen">
+    <div className="main h-full">
       <div className="container mx-auto p-4">
         <div className="flex items-center justify-between mt-16 py-4">
           {/**icono */}
