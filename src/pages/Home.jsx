@@ -19,7 +19,7 @@ const Home = () => {
             />
             <div className="mt-8 md:mt-0">
               <h1 className="text-4xl md:text-5xl font-bold">Mini E-commerce</h1>
-              <p className="py-6 text-justify">
+              <p className="py-6 text-justify px-2">
                 Proyecto elaborado con tecnologías modernas y robustas;
                 tales como ReactJS para el diseño de interfaces de usuario y Tailwind CSS como 
                 framework CSS que permite un desarrollo ágil, basado en clases de utilidad que se 

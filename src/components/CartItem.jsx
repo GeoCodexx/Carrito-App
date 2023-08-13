@@ -64,7 +64,7 @@ const CartItem = ({ item, pageCart = false }) => {
       </div>
       {/**remove icon */}
       <div
-        className="cursor-pointer px-1 tooltip tooltip-left"
+        className="cursor-pointer px-1 md:tooltip md:tooltip-left"
         data-tip="Quitar"
         onClick={() => {
           dispatch({ type: types.remove, payload: id });

@@ -118,7 +118,7 @@ const NavBar = () => {
           </div>
           <Link
             to="/"
-            className="btn btn-ghost normal-case text-lg lg:text-2xl"
+            className="btn btn-ghost normal-case text-xl lg:text-2xl"
           >
             <img src={logoImage} className="w-8 lg:w-10" alt="logo" />
             Carrito App
@@ -173,13 +173,11 @@ const NavBar = () => {
             </div>
           </div>
 
-         
-
           {/**BUTTON CART */}
           <div
             className={`${
               isOpen && "hidden"
-            } md:inline-block dropdown dropdown-end sm:ml-2 tooltip tooltip-left`}
+            } md:inline-block dropdown dropdown-end sm:ml-2 md:tooltip md:tooltip-left`}
             data-tip="Carrito de compras"
           >
             <label tabIndex={0} className="btn btn-ghost btn-circle btn-sm">
