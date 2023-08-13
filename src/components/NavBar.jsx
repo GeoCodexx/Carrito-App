@@ -5,9 +5,10 @@ import { CartContext } from "../contexts/CartProvider";
 import { IoMdSearch } from "react-icons/io";
 import { VscFilter } from "react-icons/vsc";
 import { SlOptionsVertical } from "react-icons/sl";
-import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineMenu} from "react-icons/ai";
 import { ProductContext } from "../contexts/ProductProvider";
 import { MdSearch } from "react-icons/md";
+import { CgDarkMode } from "react-icons/cg";
 import logoImage from "../assets/logo-cart-96x96.svg";
 import { DarkModeContext } from "../contexts/DarkModeProvider";
 
@@ -237,20 +238,20 @@ const NavBar = () => {
             >
               <li>
                 <a onClick={handleClickSearch}>
-                  <IoMdSearch /> Buscar
+                  <IoMdSearch className="w-5 h-5"/> Buscar artículo
                 </a>
               </li>
               <li>
                 <a onClick={handleClickFilter}>
-                  <VscFilter /> Filtrar
+                  <VscFilter className="w-5 h-5"/> Filtrar búsqueda
                 </a>
               </li>
-              {/* <li>
-                <a onClick={() => setIsOpen(!isOpen)}>
-                  <AiOutlineShoppingCart />
-                  Ver Lista
+              <li>
+                <a onClick={toggleDarkMode}>
+                  <CgDarkMode className="w-5 h-5"/>
+                  Tema ocuro/claro
                 </a>
-              </li> */}
+              </li>
             </ul>
           </div>
 
