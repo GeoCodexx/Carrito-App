@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="main">
       {/**HERO HOMEPAGE */}
-      <header>
+      <header className="pt-[68px]">
         <div className="hero min-h-screen bg-base-200">
           <div className="hero-content flex-col lg:flex-row">
             <img

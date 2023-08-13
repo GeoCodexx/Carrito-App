@@ -92,11 +92,6 @@ const NavBar = () => {
     setSearch("");
   };
 
-  const handleDialogFilter = () => {
-    window.modal_filter.close();
-    //setSearch("");
-  };
-
   return (
     <nav className="shadow-lg fixed z-10 w-full">
       <div className="navbar bg-base-100 lg:px-5">
@@ -123,7 +118,7 @@ const NavBar = () => {
           </div>
           <Link
             to="/"
-            className="btn btn-ghost normal-case text-xl lg:text-2xl"
+            className="btn btn-ghost normal-case text-lg lg:text-2xl"
           >
             <img src={logoImage} className="w-8 lg:w-10" alt="logo" />
             Carrito App
@@ -178,42 +173,16 @@ const NavBar = () => {
             </div>
           </div>
 
-          {/**BUTTON OPTIONS MOVIL */}
-          <div className="dropdown dropdown-end md:hidden">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <SlOptionsVertical className="h-4 w-4" />
-            </label>
-            <ul
-              tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a onClick={handleClickSearch}>
-                  <IoMdSearch /> Buscar
-                </a>
-              </li>
-              <li>
-                <a onClick={handleClickFilter}>
-                  <VscFilter /> Filtrar
-                </a>
-              </li>
-              <li>
-                <a onClick={() => setIsOpen(!isOpen)}>
-                  <AiOutlineShoppingCart />
-                  Ver Lista
-                </a>
-              </li>
-            </ul>
-          </div>
+         
 
           {/**BUTTON CART */}
           <div
             className={`${
               isOpen && "hidden"
-            } hidden md:inline-block dropdown dropdown-end sm:ml-2 tooltip tooltip-left`}
+            } md:inline-block dropdown dropdown-end sm:ml-2 tooltip tooltip-left`}
             data-tip="Carrito de compras"
           >
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
+            <label tabIndex={0} className="btn btn-ghost btn-circle btn-sm">
               <div className="indicator">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -241,7 +210,7 @@ const NavBar = () => {
               className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow"
             >
               <div className="card-body">
-                <span className="font-bold text-lg">
+                <span className="font-bold md:text-lg">
                   {state.length} Artículo(s)
                 </span>
                 <span className="fondt-semibold mb-2">
@@ -249,7 +218,7 @@ const NavBar = () => {
                 </span>
                 <div className="card-actions">
                   <button
-                    className="btn btn-success btn-block"
+                    className="btn btn-success btn-block btn-sm md:btn-md"
                     onClick={() => setIsOpen(!isOpen)}
                   >
                     Ver Lista
@@ -257,6 +226,34 @@ const NavBar = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+           {/**BUTTON OPTIONS MOVIL */}
+           <div className="dropdown dropdown-end md:hidden">
+            <label tabIndex={0} className="btn btn-ghost btn-circle btn-sm">
+              <SlOptionsVertical className="h-4 w-4" />
+            </label>
+            <ul
+              tabIndex={0}
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a onClick={handleClickSearch}>
+                  <IoMdSearch /> Buscar
+                </a>
+              </li>
+              <li>
+                <a onClick={handleClickFilter}>
+                  <VscFilter /> Filtrar
+                </a>
+              </li>
+              {/* <li>
+                <a onClick={() => setIsOpen(!isOpen)}>
+                  <AiOutlineShoppingCart />
+                  Ver Lista
+                </a>
+              </li> */}
+            </ul>
           </div>
 
           {/**BUTTON DARKMODE */}

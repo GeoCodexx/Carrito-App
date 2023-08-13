@@ -34,10 +34,10 @@ function App() {
   return (
     <>
       <div
-        className="relative bg-base-300"
+        className="relative bg-base-300 font-[Poppins]"
         data-theme={darkMode ? "dark" : "light"}
       >
-        <NavBar />
+         <NavBar /> 
         {!shouldHideFilter && <SearchFiltersButton />}
         {!shouldHideFilter && <Filter />}
         <MainRouter />

@@ -16,5 +16,6 @@
     margin: 0;
     box-sizing: border-box;
     min-width: 340px;
+    box-sizing: content-box;
   }
 }

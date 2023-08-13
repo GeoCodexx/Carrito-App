@@ -13,7 +13,7 @@ const Sidebar = () => {
     <div
       className={`${
         isOpen ? "right-0" : "-right-full"
-      } w-full bg-base-200 fixed top-0 h-screen shadow-2xl md:w-[45vw]  lg:w-[40vw] xl:max-w-[30vw] transition-all duration-500 z-50 px-4 lg:px-[20px] rounded-s-md select-none`}
+      } w-full bg-base-200 fixed top-0 h-full shadow-2xl md:w-[45vw]  lg:w-[40vw] xl:max-w-[30vw] transition-all duration-500 z-50 px-4 lg:px-[20px] rounded-s-md select-none`}
     >
       <div className="flex items-center justify-between py-2">
         {/**icono */}
@@ -27,11 +27,12 @@ const Sidebar = () => {
           </button>
         </div>
 
-        <div className="text-sm md:text-base uppercase font-semibold md:mr-6">
+        <div className="text-sm md:text-base uppercase font-semibold md:mr-3">
           Carrito de Compras ({state.length} arts.)
         </div>
       </div>
-      <div className="mt-2 pb-3 border-b border-base-content h-3/5 w-full overflow-y-auto">
+      <div className="mt-1 pb-3 border-b border-base-content h-1/2
+       w-full overflow-y-auto">
         {state.map((item, i) => (
           <CartItem item={item} key={i} />
         ))}
@@ -49,10 +50,10 @@ const Sidebar = () => {
             TOTAL: <span className="ml-3">{`S/${total}`}</span>
           </div>
         </div>
-        <div className="flex justify-center w-full mt-3 pb-2">
+        <div className="flex justify-center w-full mt-6 pb-2">
           <Link
             to="/cart"
-            className="btn btn-wide btn-outline"
+            className="btn btn-wide btn-secondary md:btn-outline"
             onClick={handleClose}
           >
             IR AL CARRITO

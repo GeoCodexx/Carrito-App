@@ -134,7 +134,7 @@ const Cart = () => {
             </div>
           </div>
 
-          <div className="summary pb-10 pt-4 px-10 md:mx-auto w-96">
+          <div className="summary pb-10 pt-4 px-10 md:mx-auto md:w-96">
             <h2 className="text-lg font-semibold uppercase border-b-2 border-base-content">
               Detalles de compra
             </h2>

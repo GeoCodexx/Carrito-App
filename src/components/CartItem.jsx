@@ -13,7 +13,7 @@ const CartItem = ({ item, pageCart = false }) => {
   const {darkMode} = useContext(DarkModeContext);
 
   return (
-    <div className={`flex ${!pageCart && 'justify-between'} bg-base-100 items-center ${!pageCart && 'md:justify-center'} rounded-md ${!darkMode && 'shadow-md border'} px-2 md:px-4 ${pageCart && 'w-[500px]'} my-2`}>
+    <div className={`flex ${!pageCart && 'justify-between'} bg-base-100 items-center ${!pageCart && 'md:justify-center'} rounded-md ${!darkMode && 'shadow-md border'} px-2 md:px-4 ${pageCart && 'md:w-[500px]'} my-2`}>
       <div className="min-h-[120px] flex items-center px-1">
         {/**Image */}
         <Link to={`/product/${id}`}>
